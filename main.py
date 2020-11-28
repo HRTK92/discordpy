@@ -2,8 +2,7 @@ import discord
 import json
 import datetime
 import requests
-from sanic import Sanic
-from sanic.response import html
+
 
 json_open_confing = open('confing.json', 'r')
 confing = json.load(json_open_confing)

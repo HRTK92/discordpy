@@ -1,5 +1,3 @@
 discord.py>=1.4.1
-json
 datetime
 requests
-Sanic
