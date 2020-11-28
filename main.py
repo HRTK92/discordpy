@@ -28,7 +28,7 @@ async def on_message(message):
 		guildid = message.guild.id
 		await message.channel.send(guildid)
 		await message.channel.send(
-		    confing["servers"]["622206625586872323"])
+		    confing["server"]["622206625586872323"])
 	if message.content == "test":
 		data = requests.get("https://fortnite-api.com/v1/map")
 		await message.channel.send(data['data']['images']['blank'])
