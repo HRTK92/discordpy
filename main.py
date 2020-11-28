@@ -19,7 +19,7 @@ async def on_ready():
 async def on_message(message):
 	if message.author.bot:
 		return
-	print(f'[{message.author}] [{message.channel}]|{message.content})
+	print(f'[{message.author}] [{message.channel}]|{message.content}')
 	if message.content == "help":
 		embed = discord.Embed(title="ボットコマンドの使い方", description="説明")
 		embed.timestamp = datetime.datetime.now()
