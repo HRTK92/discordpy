@@ -45,10 +45,11 @@ async def on_message(message):
 	if message.content == "item":
 	  response = requests.get(f'https://fortnite-api.com/v2/cosmetics/br/search/all?name={joinedArgs}&matchMethod=starts&language={response_lang}&searchLanguage={request_lang}')
 	  geted = response.json()
+	  print(geted)
 	  if response.status_code == 200:
-      mbed_count=0
-      item_left_count=0
-      for item in geted['data']:
+	    mbed_count=0
+	    item_left_count=0
+	    for item in geted['data']:
         if embed_count !=200:
           embed_count+=1
           item_id = item['id']
@@ -61,11 +62,11 @@ async def on_message(message):
             item_set = text()['none']
           else:
             item_set = "アイテム"
-            name = ""
+            name = "名前"
             desc = ""
             intro = ""
             of_set = ""
-            txt_id = 
+            txt_id = ""
             rarity = ""
         embed = discord.Embed(title=f'{item_name}', color=color(item['rarity']['value']))
         embed.add_field(name=desc, value=f'`{item_description}`')
@@ -82,7 +83,7 @@ async def on_member_join(member):
 	guildid = message.guild.id
 	channel = client.get_channel(
 	    confing["servers"]["622206625586872323"]["channel"]["Notice"])
-	await channel.send("")
+	await channel.send(f'ようこそサーバーへ {member}\nサーバー管理者:<@618332297275375636>\nhttps://discord.gg/vXgDnP7')
 
 
 client.run(confing["TOKEN"])
