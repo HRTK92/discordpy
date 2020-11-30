@@ -37,6 +37,7 @@ async def on_message(message):
 	  response = requests.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}')
 	  geted = response.json()
 	  if response.status_code == 200:
+	    text = "Fortnite News "
 	    image = geted['data']['image']
 	    embed = discord.Embed(title=text()['br_news'])
 	    embed.set_image(url=image)
