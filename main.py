@@ -45,10 +45,8 @@ async def on_message(message):
 	if message.content == "item":
 	  response = requests.get(f'https://fortnite-api.com/v2/cosmetics/br/search/all?name={joinedArgs}&matchMethod=starts&language={response_lang}&searchLanguage={request_lang}')
 	  geted = response.json()
-	  
-	  
 	  if response.status_code == 200:
-      embed_count=0
+      mbed_count=0
       item_left_count=0
       for item in geted['data']:
         if embed_count !=200:
@@ -62,7 +60,7 @@ async def on_message(message):
           if item['set'] == None:
             item_set = text()['none']
           else:
-            item_set = ""
+            item_set = "アイテム"
             name = ""
             desc = ""
             intro = ""
