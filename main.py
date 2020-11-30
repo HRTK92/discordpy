@@ -32,7 +32,25 @@ async def on_message(message):
 	if message.content == "test":
 		data = requests.get("https://fortnite-api.com/v1/map")
 		await message.channel.send(data['data']['images']['blank'])
-
+	if message.content == "":
+	  res_lang = "ja"
+	  response = requests.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}')
+    geted = response.json()
+    if response.status_code == 200　
+    
+      image = geted['data']['image']
+      embed = discord.Embed(title=text()['br_news'])
+      embed.set_image(url=image)
+      await message.channel.send(embed=embed)
+    elif response.status_code == 400:
+      error = geted['error']
+      embed = discord.Embed(title='Error', description=f'`{error}`')
+      await message.channel.send(embed=embed)
+    elif response.status_code == 404:
+      error =geted['error']
+      embed = discord.Embed(title='Error', 
+      description=f'``{error}``')
+      await message.channel.send(embed=embed)
 
 @client.event
 async def on_member_join(member):
