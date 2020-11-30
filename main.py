@@ -38,9 +38,9 @@ async def on_message(message):
 	  geted = response.json()
 	  print(geted)
 	  if response.status_code == 200:
-	    text = "Fortnite News "
+	    text = "Fortnite News"
 	    image = geted['data']['image']
-	    embed = discord.Embed(title=text()['br_news'])
+	    embed = discord.Embed(title=text)
 	    embed.set_image(url=image)
 	    await message.channel.send(embed=embed)
    
