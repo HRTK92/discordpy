@@ -32,7 +32,7 @@ async def on_message(message):
 	if message.content == "test":
 		data = requests.get("https://fortnite-api.com/v1/map")
 		await message.channel.send(data['data']['images']['blank'])
-	if message.content == "":
+	if message.content == "news":
 	  res_lang = "ja"
 	  response = requests.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}')
     geted = response.json()
