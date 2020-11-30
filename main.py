@@ -36,6 +36,7 @@ async def on_message(message):
 	  res_lang = "ja"
 	  response = requests.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}')
 	  geted = response.json()
+	  print(geted)
 	  if response.status_code == 200:
 	    text = "Fortnite News "
 	    image = geted['data']['image']
