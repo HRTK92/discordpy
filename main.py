@@ -50,32 +50,32 @@ async def on_message(message):
 	    mbed_count=0
 	    item_left_count=0
 	    for item in geted['data']:
-        if embed_count !=200:
-          embed_count+=1
-          item_id = item['id']
-          item_name = item['name']
-          item_description = item['description']
-          item_icon = item['images']['icon']
-          item_introduction = item['introduction']['text']
-          item_rarity = item['rarity']['displayValue']
-          if item['set'] == None:
-            item_set = text()['none']
-          else:
-            item_set = "アイテム"
-            name = "名前"
-            desc = ""
-            intro = ""
-            of_set = ""
-            txt_id = ""
-            rarity = ""
-        embed = discord.Embed(title=f'{item_name}', color=color(item['rarity']['value']))
-        embed.add_field(name=desc, value=f'`{item_description}`')
-        embed.add_field(name=txt_id, value=f'`{item_id}`')
-        embed.add_field(name=intro, value=f'`{item_introduction}`')
-        embed.add_field(name=of_set, value=f'`{item_set}`')
-        embed.add_field(name=rarity, value=f'`{item_rarity}`')
-        embed.set_thumbnail(url=item_icon)
-        await message.channel.send(embed=embed)
+	      if embed_count !=200:
+	        embed_count+=1
+	        item_id = item['id']
+	        item_name = item['name']
+	        item_description = item['description']
+	        item_icon = item['images']['icon']
+	        item_introduction = item['introduction']['text']
+	        item_rarity = item['rarity']['displayValue']
+	        if item['set'] == None:
+	          item_set = text()['none']
+	        else:
+	          item_set = "アイテム"
+	          name = "名前"
+	          desc = ""
+	          intro = ""
+	          of_set = ""
+	          txt_id = ""
+	          rarity = ""
+	      embed = discord.Embed(title=f'{item_name}', color=color(item['rarity']['value']))
+	      embed.add_field(name=desc, value=f'`{item_description}`')
+	      embed.add_field(name=txt_id, value=f'`{item_id}`')
+	      embed.add_field(name=intro, value=f'`{item_introduction}`')
+	      embed.add_field(name=of_set, value=f'`{item_set}`')
+	      embed.add_field(name=rarity, value=f'`{item_rarity}`')
+	      embed.set_thumbnail(url=item_icon)
+	      await message.channel.send(embed=embed)
 
    
 @client.event
