@@ -47,7 +47,7 @@ async def on_message(message):
 	    await message.channel.send(embed=embed)
 	if message.content == "map":
 	  res_lang = "ja"
-	  response = requests.get(f'https://fortnite-api.com/v1/news/map?language={res_lang}')
+	  response = requests.get(f'https://fortnite-api.com/v1/map?language={res_lang}')
 	  geted = response.json()
 	  if response.status_code == 200:
 	    text = "Fortnite map"
