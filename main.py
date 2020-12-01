@@ -2,6 +2,8 @@ import discord
 import json
 import datetime
 import requests
+from discord.ext import commands
+bot = commands.Bot(command_prefix='>')
 
 json_open_confing = open('confing.json', 'r')
 confing = json.load(json_open_confing)
@@ -12,16 +14,17 @@ client = discord.Client()
 async def on_ready():
 	print('ログインしました')
 	print("discord.py" + discord.__version__)
-	print("トークン:\n" + confing["TOKEN"])
+	print()
 
 
 @client.event
 async def on_message(message):
 	if message.author.bot:
 		return
-	print(f'[{message.author}] [{message.channel}]|{message.content}')
+	print(f'[{message.author}] [{message.channel}]| {message.content}')
 	if message.content == "help":
 		embed = discord.Embed(title="ボットコマンドの使い方", description="説明")
+		embed.add_field(name="news",value="Fortnite News を表示します")
 		embed.timestamp = datetime.datetime.now()
 		await message.channel.send(embed=embed)
 	if message.content == "confing":
@@ -42,7 +45,19 @@ async def on_message(message):
 	    embed = discord.Embed(title=text)
 	    embed.set_image(url=image)
 	    await message.channel.send(embed=embed)
+	if message.content == "map":
+	  res_lang = "ja"
+	  response = requests.get(f'https://fortnite-api.com/v1/news/map?language={res_lang}')
+	  geted = response.json()
+	  if response.status_code == 200:
+	    text = "Fortnite map"
+	    image = geted['data']['images']['pois']
+	    embed = discord.Embed(title=text)
+	    embed.set_image(url=image)
+	    await message.channel.send(embed=embed)
 	if message.content == "item":
+	  joinedArgs = "ブラック"
+	  response_lang = "ja"
 	  response = requests.get(f'https://fortnite-api.com/v2/cosmetics/br/search/all?name={joinedArgs}&matchMethod=starts&language={response_lang}&searchLanguage={request_lang}')
 	  geted = response.json()
 	  print(geted)
@@ -87,3 +102,12 @@ async def on_member_join(member):
 
 
 client.run(confing["TOKEN"])
+
+
+
+
+
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send('pong')
