@@ -55,6 +55,17 @@ async def on_message(message):
 	    embed = discord.Embed(title=text)
 	    embed.set_image(url=image)
 	    await message.channel.send(embed=embed)
+	if message.content.startswith == "fn ":
+	  searchname = message.content[4:]
+	  res_lang = "ja"
+	  response = requests.get(f'https://fortnite-api.com/v1/stats/br/v2?name={searchname}&image=all')
+	  geted = response.json()
+	  if response.status_code == 200:
+	    text = "Fortnite Players Data"
+	    image = geted['data']['image']
+	    embed = discord.Embed(title=text)
+	    embed.set_image(url=image)
+	    await message.channel.send(embed=embed)
 	if message.content == "item":
 	  joinedArgs = "ブラック"
 	  response_lang = "ja"
