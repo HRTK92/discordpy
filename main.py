@@ -1,4 +1,5 @@
 import discord
+from flask import Flask, request
 import json
 import datetime
 import requests
@@ -8,20 +9,32 @@ bot = commands.Bot(command_prefix='>')
 json_open_confing = open('confing.json', 'r')
 confing = json.load(json_open_confing)
 client = discord.Client()
+app = Flask(__name__)
 
+@app.route("/")
+def hello_world():
+	return "起動中"
+@app.route("/webhook", methods=['POST'])
+def callback():
+	signature = request.headers['X-Line-Signature']
+	body = request.get_data(as_text=True)
+	app.logger.info("Request body: " + body)
+	try:
+		handler.handle(body, signature)
+	except InvalidSignatureError:
+		abort(400)
+	return 'OK'
 
 @client.event
 async def on_ready():
 	print('ログインしました')
 	print("discord.py" + discord.__version__)
-	print()
-
 
 @client.event
 async def on_message(message):
 	if message.author.bot:
 		return
-	print(f'[{message.author}] [{message.channel}]| {message.content}')
+	print(f'[{message.author}] [{message.channel}] | {message.content}')
 	if message.content == "help":
 		embed = discord.Embed(title="ボットコマンドの使い方", description="説明")
 		embed.add_field(name="news", value="Fortnite News を表示します")
@@ -66,9 +79,10 @@ async def on_message(message):
 		geted = response.json()
 
 		if response.status_code == 200:
-			text = "Fortnite Players Data"
+			text = f'Fortnite Players Data : {name[1]}'
 			image = geted['data']['image']
 			embed = discord.Embed(title=text)
+			embed.set_footer(text="詳しくはこちら")
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 		if response.status_code == 404:
@@ -130,3 +144,4 @@ client.run(confing["TOKEN"])
 @bot.command()
 async def ping(ctx):
 	await ctx.send('pong')
+
