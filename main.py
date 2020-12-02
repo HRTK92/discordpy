@@ -41,8 +41,6 @@ def get_data(message):
 	    '/category_channels': message.guild.categories,
 	}
 	return data_table.get(command)
-
-
 @client.event
 async def on_ready():
 	print('ログインしました')
@@ -128,7 +126,10 @@ async def on_message(message):
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 		if response.status_code == 404:
-			await message.channel.send("読み込みに失敗しました")
+		  text = f'Fortnite Players Data : {name[1]}'
+		  embed = discord.Embed(title=text)
+		  embed.add_field(name="読み込みに失敗しました",value=f'内容:{geted["error"]}')
+		  await message.channel.send(embed=embed)
 	if message.content == "item":
 		joinedArgs = "ブラック"
 		response_lang = "ja"
