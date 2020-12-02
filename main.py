@@ -82,7 +82,7 @@ async def on_message(message):
 			text = f'Fortnite Players Data : {name[1]}'
 			image = geted['data']['image']
 			embed = discord.Embed(title=text)
-			embed.set_footer(text="詳しくはこちら")
+			embed.add_field(name="link",value=f'詳しくは[こちら](https://fortnitetracker.com/profile/gamepad/{name[1]})')
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 		if response.status_code == 404:
