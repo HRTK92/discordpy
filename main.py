@@ -121,7 +121,7 @@ async def on_message(message):
 			embed.add_field(
 			    name="link",
 			    value=
-			    f'詳しくは[こちら](https://fortnitetracker.com/profile/all/{name[1]})'
+			    f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name[1]})'
 			)
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
@@ -175,7 +175,7 @@ async def on_message(message):
 async def on_member_join(member):
 	guildid = message.guild.id
 	channel = client.get_channel(
-	    confing["servers"]["622206625586872323"]["channel"]["Notice"])
+	    confing["server"]["622206625586872323"]["channel"]["Notice"])
 	await channel.send(
 	    f'ようこそサーバーへ {member}\nサーバー管理者:<@618332297275375636>\nhttps://discord.gg/vXgDnP7'
 	)
