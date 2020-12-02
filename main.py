@@ -11,9 +11,13 @@ confing = json.load(json_open_confing)
 client = discord.Client()
 app = Flask(__name__)
 
+
+#Flask
 @app.route("/")
 def hello_world():
 	return "起動中"
+
+
 @app.route("/webhook", methods=['POST'])
 def callback():
 	signature = request.headers['X-Line-Signature']
@@ -25,10 +29,25 @@ def callback():
 		abort(400)
 	return 'OK'
 
+
+#discord
+def get_data(message):
+	command = message.content
+	data_table = {
+	    '/members': message.guild.members,
+	    '/roles': message.guild.roles,
+	    '/text_channels': message.guild.text_channels,
+	    '/voice_channels': message.guild.voice_channels,
+	    '/category_channels': message.guild.categories,
+	}
+	return data_table.get(command)
+
+
 @client.event
 async def on_ready():
 	print('ログインしました')
 	print("discord.py" + discord.__version__)
+
 
 @client.event
 async def on_message(message):
@@ -46,6 +65,8 @@ async def on_message(message):
 		guildid = message.guild.id
 		await message.channel.send(guildid)
 		await message.channel.send(confing["server"]["622206625586872323"])
+	if message.content.startswith("/"):
+	  await message.channel.send(get_data(message))
 	if message.content == "test":
 		data = requests.get("https://fortnite-api.com/v1/map")
 		await message.channel.send(data['data']['images']['blank'])
@@ -58,11 +79,11 @@ async def on_message(message):
 			text = "Fortnite News"
 			image = geted['data']['image']
 			if image == True:
-			  embed = discord.Embed(title=text)
-			  embed.set_image(url=image)
-			  await message.channel.send(embed=embed)
+				embed = discord.Embed(title=text)
+				embed.set_image(url=image)
+				await message.channel.send(embed=embed)
 			else:
-			  await message.channel.send('画像がありません')
+				await message.channel.send('画像がありません')
 	if message.content == "map":
 		res_lang = "ja"
 		response = requests.get(
@@ -75,16 +96,17 @@ async def on_message(message):
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 	if message.content == "shop":
-	  res_lang = "ja"
-	  response = requests.get(f'https://fortnite-api.com/v2/shop/br?language={res_lang}')
-	  geted = response.json()
-	  if response.status_code == 200:
-	    text = "Fortnite shop"
-	    image = geted
-	    embed = discord.Embed(title=text)
-	    shopdate = geted
-	    embed.add_field(name="date",value=shopdate)
-	    await message.channel.send(embed=embed)
+		res_lang = "ja"
+		response = requests.get(
+		    f'https://fortnite-api.com/v2/shop/br?language={res_lang}')
+		geted = response.json()
+		if response.status_code == 200:
+			text = "Fortnite shop"
+			image = geted
+			embed = discord.Embed(title=text)
+			shopdate = geted
+			embed.add_field(name="date", value=shopdate)
+			await message.channel.send(embed=embed)
 	if message.content.startswith("fn"):
 		msg = message.content
 		name = msg.split()
@@ -98,7 +120,11 @@ async def on_message(message):
 			text = f'Fortnite Players Data : {name[1]}'
 			image = geted['data']['image']
 			embed = discord.Embed(title=text)
-			embed.add_field(name="link",value=f'詳しくは[こちら](https://fortnitetracker.com/profile/all/{name[1]})')
+			embed.add_field(
+			    name="link",
+			    value=
+			    f'詳しくは[こちら](https://fortnitetracker.com/profile/all/{name[1]})'
+			)
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 		if response.status_code == 404:
@@ -160,4 +186,3 @@ client.run(confing["TOKEN"])
 @bot.command()
 async def ping(ctx):
 	await ctx.send('pong')
-
