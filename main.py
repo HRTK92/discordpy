@@ -74,6 +74,17 @@ async def on_message(message):
 			embed = discord.Embed(title=text)
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
+	if message.content == "shop":
+	  res_lang = "ja"
+	  response = requests.get(f'https://fortnite-api.com/v2/shop/br?language={res_lang}')
+	  geted = response.json()
+	  if response.status_code == 200:
+	    text = "Fortnite shop"
+	    image = geted
+	    embed = discord.Embed(title=text)
+	    shopdate = geted
+	    embed.add_field(name="date",value=shopdate)
+	    await message.channel.send(embed=embed)
 	if message.content.startswith("fn"):
 		msg = message.content
 		name = msg.split()
