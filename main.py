@@ -77,7 +77,7 @@ async def on_message(message):
 			text = "Fortnite News"
 			image = geted['data']['image']
 			if image == True:
-				embed = discord.Embed(title=text)
+				embed = discord.Embed(title=text, color=0x00ff00)
 				embed.set_image(url=image)
 				await message.channel.send(embed=embed)
 			else:
@@ -90,7 +90,7 @@ async def on_message(message):
 		if response.status_code == 200:
 			text = "Fortnite map"
 			image = geted['data']['images']['pois']
-			embed = discord.Embed(title=text)
+			embed = discord.Embed(title=text, color=0x00ff00)
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 	if message.content == "shop":
@@ -117,7 +117,7 @@ async def on_message(message):
 		if response.status_code == 200:
 			text = f'Fortnite Players Data : {name[1]}'
 			image = geted['data']['image']
-			embed = discord.Embed(title=text)
+			embed = discord.Embed(title=text, color=0x00ff00)
 			embed.add_field(
 			    name="link",
 			    value=
@@ -127,7 +127,7 @@ async def on_message(message):
 			await message.channel.send(embed=embed)
 		if response.status_code == 404:
 		  text = f'Fortnite Players Data : {name[1]}'
-		  embed = discord.Embed(title=text)
+		  embed = discord.Embed(title=text, color=0xff0000)
 		  embed.add_field(name="読み込みに失敗しました",value=f'内容:{geted["error"]}')
 		  await message.channel.send(embed=embed)
 	if message.content == "item":
