@@ -36,8 +36,10 @@ async def on_message(message):
 		return
 	print(f'[{message.author}] [{message.channel}] | {message.content}')
 	if message.content == "help":
-		embed = discord.Embed(title="ボットコマンドの使い方", description="説明")
+		embed = discord.Embed(title="ボットコマンドの使い方", description="")
 		embed.add_field(name="news", value="Fortnite News を表示します")
+		embed.add_field(name="fn <ユーザー名>", value="成績を表示します by fortnite-api")
+		embed.add_field(name="map", value="マップを表示します")
 		embed.timestamp = datetime.datetime.now()
 		await message.channel.send(embed=embed)
 	if message.content == "confing":
@@ -55,9 +57,12 @@ async def on_message(message):
 		if response.status_code == 200:
 			text = "Fortnite News"
 			image = geted['data']['image']
-			embed = discord.Embed(title=text)
-			embed.set_image(url=image)
-			await message.channel.send(embed=embed)
+			if image == True:
+			  embed = discord.Embed(title=text)
+			  embed.set_image(url=image)
+			  await message.channel.send(embed=embed)
+			else:
+			  await message.channel.send('画像がありません')
 	if message.content == "map":
 		res_lang = "ja"
 		response = requests.get(
@@ -82,7 +87,7 @@ async def on_message(message):
 			text = f'Fortnite Players Data : {name[1]}'
 			image = geted['data']['image']
 			embed = discord.Embed(title=text)
-			embed.add_field(name="link",value=f'詳しくは[こちら](https://fortnitetracker.com/profile/gamepad/{name[1]})')
+			embed.add_field(name="link",value=f'詳しくは[こちら](https://fortnitetracker.com/profile/all/{name[1]})')
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 		if response.status_code == 404:
