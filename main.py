@@ -106,30 +106,24 @@ async def on_message(message):
 			embed.add_field(name="date", value=shopdate)
 			await message.channel.send(embed=embed)
 	if message.content.startswith("fn"):
-		msg = message.content
-		name = msg.split()
-		res_lang = "ja"
-		response = requests.get(
-		    f'https://fortnite-api.com/v1/stats/br/v2?name={name[1]}&image=all'
-		)
-		geted = response.json()
-
-		if response.status_code == 200:
-			text = f'Fortnite Players Data : {name[1]}'
-			image = geted['data']['image']
-			embed = discord.Embed(title=text, color=0x00ff00)
-			embed.add_field(
-			    name="link",
-			    value=
-			    f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name[1]})'
-			)
-			embed.set_image(url=image)
-			await message.channel.send(embed=embed)
-		if response.status_code == 404:
-		  text = f'Fortnite Players Data : {name[1]}'
-		  embed = discord.Embed(title=text, color=0xff0000)
-		  embed.add_field(name="読み込みに失敗しました",value=f'内容:{geted["error"]}')
-		  await message.channel.send(embed=embed)
+	  edit = await message.channel.send("データを取得中……")
+	  msg = message.content
+	  name = msg.split()
+	  res_lang = "ja"
+	  response = requests.get(f'https://fortnite-api.com/v1/stats/br/v2?name={name[1]}&image=all')
+	  geted = response.json()
+	  if response.status_code == 200:
+	    text = f'Fortnite Players Data : {name[1]}'
+	    image = geted['data']['image']
+	    embed = discord.Embed(title=text, color=0x00ff00)
+	    embed.add_field(name="link",value=f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name[1]})')
+	    embed.set_image(url=image)
+	    await edit.edit(content="", embed=embed)
+	  if response.status_code == 404:
+	   text = f'Fortnite Players Data : {name[1]}'
+	   embed = discord.Embed(title=text, color=0xff0000)
+	   embed.add_field(name="読み込みに失敗しました",value=f'内容:{geted["error"]}')
+	   await edit.edit(embed=embed)
 	if message.content == "item":
 		joinedArgs = "ブラック"
 		response_lang = "ja"
