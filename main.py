@@ -76,12 +76,9 @@ async def on_message(message):
 		if response.status_code == 200:
 			text = "Fortnite News"
 			image = geted['data']['image']
-			if image == True:
-				embed = discord.Embed(title=text, color=0x00ff00)
-				embed.set_image(url=image)
-				await message.channel.send(embed=embed)
-			else:
-				await message.channel.send('画像がありません')
+			embed = discord.Embed(title=text, color=0x00ff00)
+			embed.set_image(url=image)
+			await message.channel.send(embed=embed)
 	if message.content == "map":
 		res_lang = "ja"
 		response = requests.get(
