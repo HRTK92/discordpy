@@ -41,6 +41,8 @@ def get_data(message):
 	    '/category_channels': message.guild.categories,
 	}
 	return data_table.get(command)
+
+
 @client.event
 async def on_ready():
 	print('ログインしました')
@@ -64,7 +66,7 @@ async def on_message(message):
 		await message.channel.send(guildid)
 		await message.channel.send(confing["server"]["622206625586872323"])
 	if message.content.startswith("/"):
-	  await message.channel.send(get_data(message))
+		await message.channel.send(get_data(message))
 	if message.content == "test":
 		data = requests.get("https://fortnite-api.com/v1/map")
 		await message.channel.send(data['data']['images']['blank'])
@@ -80,9 +82,13 @@ async def on_message(message):
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
 	if message.content == "map":
+		text = "Fortnite map"
+		embed = discord.Embed(title=text, color=0x00ff00)
+		embed.set_image(url="https://media.fortniteapi.io/images/map.png")
+		await message.channel.send(embed=embed)
+	if message.content == "map old":
 		res_lang = "ja"
-		response = requests.get(
-		    f'https://fortnite-api.com/v1/map?language={res_lang}')
+		response = requests.get(f'https://fortnite-api.com/v1/map')
 		geted = response.json()
 		if response.status_code == 200:
 			text = "Fortnite map"
@@ -96,31 +102,36 @@ async def on_message(message):
 		    f'https://fortnite-api.com/v2/shop/br?language={res_lang}')
 		geted = response.json()
 		if response.status_code == 200:
-			text = "Fortnite shop"
-			image = geted
+			text = "Fortnite Shop"
 			embed = discord.Embed(title=text)
 			shopdate = geted
 			embed.add_field(name="date", value=shopdate)
 			await message.channel.send(embed=embed)
 	if message.content.startswith("fn"):
-	  edit = await message.channel.send("データを取得中……")
-	  msg = message.content
-	  name = msg.split()
-	  res_lang = "ja"
-	  response = requests.get(f'https://fortnite-api.com/v1/stats/br/v2?name={name[1]}&image=all')
-	  geted = response.json()
-	  if response.status_code == 200:
-	    text = f'Fortnite Players Data : {name[1]}'
-	    image = geted['data']['image']
-	    embed = discord.Embed(title=text, color=0x00ff00)
-	    embed.add_field(name="link",value=f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name[1]})')
-	    embed.set_image(url=image)
-	    await edit.edit(content="", embed=embed)
-	  if response.status_code == 404:
-	   text = f'Fortnite Players Data : {name[1]}'
-	   embed = discord.Embed(title=text, color=0xff0000)
-	   embed.add_field(name="読み込みに失敗しました",value=f'内容:{geted["error"]}')
-	   await edit.edit(embed=embed)
+		edit = await message.channel.send("データを取得中……")
+		msg = message.content
+		name = msg.split()
+		res_lang = "ja"
+		response = requests.get(
+		    f'https://fortnite-api.com/v1/stats/br/v2?name={name[1]}&image=all'
+		)
+		geted = response.json()
+		if response.status_code == 200:
+			text = f'Fortnite Players Data : {name[1]}'
+			image = geted['data']['image']
+			embed = discord.Embed(title=text, color=0x00ff00)
+			embed.add_field(
+			    name="link",
+			    value=
+			    f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name[1]})'
+			)
+			embed.set_image(url=image)
+			await edit.edit(content="", embed=embed)
+		if response.status_code == 404:
+			text = f'Fortnite Player Data : {name[1]}'
+			embed = discord.Embed(title=text, color=0xff0000)
+			embed.add_field(name="読み込みに失敗しました", value=f'内容:{geted["error"]}')
+			await edit.edit(embed=embed)
 	if message.content == "item":
 		joinedArgs = "ブラック"
 		response_lang = "ja"
