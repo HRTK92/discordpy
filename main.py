@@ -65,11 +65,10 @@ async def on_message(message):
 		guildid = message.guild.id
 		await message.channel.send(guildid)
 		await message.channel.send(confing["server"]["622206625586872323"])
-	if message.content.startswith("/"):
+	if message.content.startswith(""):
 		await message.channel.send(get_data(message))
 	if message.content == "test":
-		data = requests.get("https://fortnite-api.com/v1/map")
-		await message.channel.send(data['data']['images']['blank'])
+	  await message.channel.send("!")
 	if message.content == "news":
 		res_lang = "ja"
 		response = requests.get(
@@ -131,7 +130,7 @@ async def on_message(message):
 			text = f'Fortnite Player Data : {name[1]}'
 			embed = discord.Embed(title=text, color=0xff0000)
 			embed.add_field(name="読み込みに失敗しました", value=f'内容:{geted["error"]}')
-			await edit.edit(embed=embed)
+			await edit.edit(content =""embed=embed)
 	if message.content == "item":
 		joinedArgs = "ブラック"
 		response_lang = "ja"
