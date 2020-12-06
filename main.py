@@ -1,6 +1,7 @@
 import discord
 from flask import Flask, request
 import json
+from PIL import Image, ImageDraw
 import datetime
 import requests
 from discord.ext import commands
@@ -31,16 +32,6 @@ def callback():
 
 
 #discord
-def get_data(message):
-	command = message.content
-	data_table = {
-	    '/members': message.guild.members,
-	    '/roles': message.guild.roles,
-	    '/text_channels': message.guild.text_channels,
-	    '/voice_channels': message.guild.voice_channels,
-	    '/category_channels': message.guild.categories,
-	}
-	return data_table.get(command)
 
 
 @client.event
@@ -65,14 +56,11 @@ async def on_message(message):
 		guildid = message.guild.id
 		await message.channel.send(guildid)
 		await message.channel.send(confing["server"]["622206625586872323"])
-	if message.content.startswith(""):
-		await message.channel.send(get_data(message))
 	if message.content == "test":
 	  await message.channel.send("!")
 	if message.content == "news":
 		res_lang = "ja"
-		response = requests.get(
-		    f'https://fortnite-api.com/v2/news/br?language={res_lang}')
+		response = requests.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}')
 		geted = response.json()
 		if response.status_code == 200:
 			text = "Fortnite News"
@@ -104,33 +92,34 @@ async def on_message(message):
 			text = "Fortnite Shop"
 			embed = discord.Embed(title=text)
 			shopdate = geted
-			embed.add_field(name="date", value=shopdate)
+			embed.add_field(name="date", value="なし")
 			await message.channel.send(embed=embed)
 	if message.content.startswith("fn"):
 		edit = await message.channel.send("データを取得中……")
 		msg = message.content
-		name = msg.split()
+		nameold = msg.split()
+		name = msg.replace("fn ","")
 		res_lang = "ja"
 		response = requests.get(
-		    f'https://fortnite-api.com/v1/stats/br/v2?name={name[1]}&image=all'
+		    f'https://fortnite-api.com/v1/stats/br/v2?name={name}&image=all'
 		)
 		geted = response.json()
 		if response.status_code == 200:
-			text = f'Fortnite Players Data : {name[1]}'
+			text = f'Fortnite Players Data : [{name}]'
 			image = geted['data']['image']
 			embed = discord.Embed(title=text, color=0x00ff00)
 			embed.add_field(
 			    name="link",
 			    value=
-			    f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name[1]})'
+			    f'[fortnitetracker](https://fortnitetracker.com/profile/all/{name})'
 			)
 			embed.set_image(url=image)
 			await edit.edit(content="", embed=embed)
 		if response.status_code == 404:
-			text = f'Fortnite Player Data : {name[1]}'
+			text = f'Fortnite Player Data : [{name}]'
 			embed = discord.Embed(title=text, color=0xff0000)
 			embed.add_field(name="読み込みに失敗しました", value=f'内容:{geted["error"]}')
-			await edit.edit(content =""embed=embed)
+			await edit.edit(content="",embed=embed)
 	if message.content == "item":
 		joinedArgs = "ブラック"
 		response_lang = "ja"
@@ -170,6 +159,11 @@ async def on_message(message):
 				embed.add_field(name=rarity, value=f'`{item_rarity}`')
 				embed.set_thumbnail(url=item_icon)
 				await message.channel.send(embed=embed)
+	if message.content == "challenge":
+	  lang = "ja"
+	  headers = {"Authorization":confing["fortnite-api"]}
+	  response = requests.get(f'https://fortniteapi.io/v1/challenges?season=current&lang={lang}', headers=headers)
+	  geted = response.json()
 
 
 @client.event
