@@ -1,15 +1,22 @@
 import discord
+import sys
+import platform
 from flask import Flask, request
 import json
 from PIL import Image, ImageDraw
 import datetime
 import requests
+import logging
 from discord.ext import commands
 bot = commands.Bot(command_prefix='>')
 
 json_open_confing = open('confing.json', 'r')
 confing = json.load(json_open_confing)
 client = discord.Client()
+
+formatter = '%(levelname)s : %(asctime)s : %(message)s'
+logging.basicConfig(
+    filename='logger.log', level=logging.INFO, format=formatter)
 app = Flask(__name__)
 
 
@@ -32,18 +39,26 @@ def callback():
 
 
 #discord
+print("ログインしています……\n")
 
 
 @client.event
 async def on_ready():
-	print('ログインしました')
-	print("discord.py" + discord.__version__)
-
+  activity = discord.Activity(name=confing["activity"], type=discord.ActivityType.watching)
+  await client.change_presence(activity=activity)
+  print("-----------------------")
+  print('ログインしました')
+  print(f'ユーザー名:{client.user}')
+  print(f'アクティビティ:{confing["activity"]}')
+  print(f'python {platform.python_version()}')
+  print("discord.py " + discord.__version__)
+  print(f'\n')
 
 @client.event
 async def on_message(message):
 	if message.author.bot:
 		return
+	logging.info(f'[{message.author}] [{message.channel}] | {message.content}')
 	print(f'[{message.author}] [{message.channel}] | {message.content}')
 	if message.content == "help":
 		embed = discord.Embed(title="ボットコマンドの使い方", description="")
@@ -53,14 +68,15 @@ async def on_message(message):
 		embed.timestamp = datetime.datetime.now()
 		await message.channel.send(embed=embed)
 	if message.content == "confing":
-		guildid = message.guild.id
-		await message.channel.send(guildid)
-		await message.channel.send(confing["server"]["622206625586872323"])
+		embed = discord.Embed(title="data", description="", color=0x0000ff)
+		embed.add_field(name="config.json", value=confing)
+		await message.channel.send(embed=embed)
 	if message.content == "test":
-	  await message.channel.send("!")
+		await message.channel.send("!")
 	if message.content == "news":
 		res_lang = "ja"
-		response = requests.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}')
+		response = requests.get(
+		    f'https://fortnite-api.com/v2/news/br?language={res_lang}')
 		geted = response.json()
 		if response.status_code == 200:
 			text = "Fortnite News"
@@ -68,41 +84,19 @@ async def on_message(message):
 			embed = discord.Embed(title=text, color=0x00ff00)
 			embed.set_image(url=image)
 			await message.channel.send(embed=embed)
-	if message.content == "map":
+	if message.content.startswith("map"):
 		text = "Fortnite map"
 		embed = discord.Embed(title=text, color=0x00ff00)
 		embed.set_image(url="https://media.fortniteapi.io/images/map.png")
 		await message.channel.send(embed=embed)
-	if message.content == "map old":
-		res_lang = "ja"
-		response = requests.get(f'https://fortnite-api.com/v1/map')
-		geted = response.json()
-		if response.status_code == 200:
-			text = "Fortnite map"
-			image = geted['data']['images']['pois']
-			embed = discord.Embed(title=text, color=0x00ff00)
-			embed.set_image(url=image)
-			await message.channel.send(embed=embed)
-	if message.content == "shop":
-		res_lang = "ja"
-		response = requests.get(
-		    f'https://fortnite-api.com/v2/shop/br?language={res_lang}')
-		geted = response.json()
-		if response.status_code == 200:
-			text = "Fortnite Shop"
-			embed = discord.Embed(title=text)
-			shopdate = geted
-			embed.add_field(name="date", value="なし")
-			await message.channel.send(embed=embed)
 	if message.content.startswith("fn"):
 		edit = await message.channel.send("データを取得中……")
 		msg = message.content
 		nameold = msg.split()
-		name = msg.replace("fn ","")
+		name = msg.replace("fn ", "")
 		res_lang = "ja"
 		response = requests.get(
-		    f'https://fortnite-api.com/v1/stats/br/v2?name={name}&image=all'
-		)
+		    f'https://fortnite-api.com/v1/stats/br/v2?name={name}&image=all')
 		geted = response.json()
 		if response.status_code == 200:
 			text = f'Fortnite Players Data : [{name}]'
@@ -119,7 +113,7 @@ async def on_message(message):
 			text = f'Fortnite Player Data : [{name}]'
 			embed = discord.Embed(title=text, color=0xff0000)
 			embed.add_field(name="読み込みに失敗しました", value=f'内容:{geted["error"]}')
-			await edit.edit(content="",embed=embed)
+			await edit.edit(content="", embed=embed)
 	if message.content == "item":
 		joinedArgs = "ブラック"
 		response_lang = "ja"
@@ -160,19 +154,32 @@ async def on_message(message):
 				embed.set_thumbnail(url=item_icon)
 				await message.channel.send(embed=embed)
 	if message.content == "challenge":
-	  lang = "ja"
-	  headers = {"Authorization":confing["fortnite-api"]}
-	  response = requests.get(f'https://fortniteapi.io/v1/challenges?season=current&lang={lang}', headers=headers)
-	  geted = response.json()
+		lang = "ja"
+		headers = {"Authorization": confing["fortnite-api"]}
+		response = requests.get(
+		    f'https://fortniteapi.io/v1/challenges?season=current&lang={lang}',
+		    headers=headers)
+		geted = response.json()
+	if message.content == "shop":
+		lang = "ja"
+		headers = {"Authorization": confing["fortnite-api"]}
+		response = requests.get(
+		    f'https://fortniteapi.io/v1/shop?lang={lang}', headers=headers)
+		geted = response.json()
+		print(geted)
+	if message.content =="invite":
+	  invite = await message.guild.invites()
+	  await message.channel.send(f'{invite}')
+	if message.content.startswith("nick "):
+	  name = message.content.replace("nick ", "")
 
 
 @client.event
 async def on_member_join(member):
-	guildid = message.guild.id
 	channel = client.get_channel(
 	    confing["server"]["622206625586872323"]["channel"]["Notice"])
 	await channel.send(
-	    f'ようこそサーバーへ {member}\nサーバー管理者:<@618332297275375636>\nhttps://discord.gg/vXgDnP7'
+	    f'ようこそサーバーへ {member.display_name}\nサーバー管理者:<@618332297275375636>\nhttps://discord.gg/vXgDnP7'
 	)
 
 
