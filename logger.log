@@ -1,24 +1,34 @@
-INFO : 2020-12-07 10:13:33,750 : logging in using static token
-INFO : 2020-12-07 10:13:34,118 : Shard ID None has sent the IDENTIFY payload.
-INFO : 2020-12-07 10:13:34,216 : Shard ID None has connected to Gateway: ["gateway-prd-main-sk2s",{"micros":55473,"calls":["discord-sessions-prd-2-57",{"micros":53073,"calls":["start_session",{"micros":48933,"calls":["api-prd-main-jg0m",{"micros":46271,"calls":["get_user",{"micros":5709},"add_authorized_ip",{"micros":1281},"get_guilds",{"micros":3773},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":3320,"calls":[]}]}]}] (Session ID: 42a236655d027f5906f0c02bdf42ae95).
-INFO : 2020-12-07 10:13:44,352 : [はらたく#3270] [テスト] | invite
-INFO : 2020-12-07 10:14:01,702 : logging in using static token
-INFO : 2020-12-07 10:14:02,045 : Shard ID None has sent the IDENTIFY payload.
-INFO : 2020-12-07 10:14:02,170 : Shard ID None has connected to Gateway: ["gateway-prd-main-vdgj",{"micros":85366,"calls":["discord-sessions-prd-2-57",{"micros":84534,"calls":["start_session",{"micros":43401,"calls":["api-prd-main-pf45",{"micros":40757,"calls":["get_user",{"micros":5371},"add_authorized_ip",{"micros":6582},"get_guilds",{"micros":11129},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":1290,"calls":[]}]}]}] (Session ID: 335dc7fce7798adebb8d07a5dcaa554f).
-INFO : 2020-12-07 10:14:08,466 : [はらたく#3270] [テスト] | invite
-INFO : 2020-12-07 10:15:43,466 : logging in using static token
-INFO : 2020-12-07 10:15:43,855 : Shard ID None has sent the IDENTIFY payload.
-INFO : 2020-12-07 10:15:43,946 : Shard ID None has connected to Gateway: ["gateway-prd-main-b5rk",{"micros":50986,"calls":["discord-sessions-prd-2-34",{"micros":45114,"calls":["start_session",{"micros":28397,"calls":["api-prd-main-2zb4",{"micros":25401,"calls":["get_user",{"micros":2802},"add_authorized_ip",{"micros":1472},"get_guilds",{"micros":3471},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":9510,"calls":[]}]}]}] (Session ID: c894fae423e0a951947cf69c57ff26c0).
-INFO : 2020-12-07 10:15:50,222 : [はらたく#3270] [テスト] | invite
-INFO : 2020-12-07 10:21:04,208 : logging in using static token
-INFO : 2020-12-07 10:21:04,548 : Shard ID None has sent the IDENTIFY payload.
-INFO : 2020-12-07 10:21:04,647 : Shard ID None has connected to Gateway: ["gateway-prd-main-rwmc",{"micros":52794,"calls":["discord-sessions-prd-2-56",{"micros":50654,"calls":["start_session",{"micros":38426,"calls":["api-prd-main-sf62",{"micros":32236,"calls":["get_user",{"micros":2787},"add_authorized_ip",{"micros":1441},"get_guilds",{"micros":3766},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":1,"calls":[]}]}]}] (Session ID: 205afab8422687fcf22fd03f115f5b84).
-INFO : 2020-12-07 10:33:05,458 : logging in using static token
-INFO : 2020-12-07 10:33:05,794 : Shard ID None has sent the IDENTIFY payload.
-INFO : 2020-12-07 10:33:05,894 : Shard ID None has connected to Gateway: ["gateway-prd-main-h9xh",{"micros":59355,"calls":["discord-sessions-prd-2-62",{"micros":58170,"calls":["start_session",{"micros":39273,"calls":["api-prd-main-xg6q",{"micros":35271,"calls":["get_user",{"micros":3271},"add_authorized_ip",{"micros":1706},"get_guilds",{"micros":4416},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":14681,"calls":[]}]}]}] (Session ID: 59954a1bb11dcc010e3fce585c67fe18).
-INFO : 2020-12-07 10:37:53,924 : logging in using static token
-INFO : 2020-12-07 10:37:54,216 : Shard ID None has sent the IDENTIFY payload.
-INFO : 2020-12-07 10:37:54,362 : Shard ID None has connected to Gateway: ["gateway-prd-main-rhhv",{"micros":100804,"calls":["discord-sessions-prd-2-70",{"micros":97986,"calls":["start_session",{"micros":72727,"calls":["api-prd-main-nx33",{"micros":70163,"calls":["get_user",{"micros":4674},"add_authorized_ip",{"micros":2984},"get_guilds",{"micros":12054},"coros_wait",{"micros":2}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":21236,"calls":[]}]}]}] (Session ID: 38b044c732924ced079841a70c847258).
-INFO : 2020-12-07 10:38:11,728 : [はらたく#3270] [テスト] | nick kska
-INFO : 2020-12-07 10:39:22,329 : Cleaning up tasks.
-INFO : 2020-12-07 10:39:22,329 : Cleaning up after 1 tasks.
+INFO : 2020-12-08 09:38:05,933 : logging in using static token
+INFO : 2020-12-08 09:38:06,150 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 09:38:06,246 : Shard ID None has connected to Gateway: ["gateway-prd-main-n51l",{"micros":55167,"calls":["discord-sessions-prd-2-36",{"micros":54491,"calls":["start_session",{"micros":28752,"calls":["api-prd-main-crjj",{"micros":26614,"calls":["get_user",{"micros":3170},"add_authorized_ip",{"micros":1281},"get_guilds",{"micros":3218},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":24775,"calls":[]}]}]}] (Session ID: d30692e4f01b88cf7cb107b71d5c0339).
+INFO : 2020-12-08 09:39:31,233 : logging in using static token
+INFO : 2020-12-08 09:39:31,470 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 09:39:31,633 : Shard ID None has connected to Gateway: ["gateway-prd-main-zh6z",{"micros":121008,"calls":["discord-sessions-prd-2-95",{"micros":119586,"calls":["start_session",{"micros":65418,"calls":["api-prd-main-dfhd",{"micros":53727,"calls":["get_user",{"micros":5419},"add_authorized_ip",{"micros":4264},"get_guilds",{"micros":6942},"coros_wait",{"micros":0}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":47325,"calls":[]}]}]}] (Session ID: 3094c3bcb17010ce41a1f8b3cdbe841c).
+INFO : 2020-12-08 09:43:52,430 : logging in using static token
+INFO : 2020-12-08 09:43:52,650 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 09:43:52,768 : Shard ID None has connected to Gateway: ["gateway-prd-main-d8d5",{"micros":77935,"calls":["discord-sessions-prd-2-22",{"micros":76704,"calls":["start_session",{"micros":57200,"calls":["api-prd-main-pc1r",{"micros":51582,"calls":["get_user",{"micros":3828},"add_authorized_ip",{"micros":2226},"get_guilds",{"micros":6054},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":18030,"calls":[]}]}]}] (Session ID: 5eed35cdc634fc63e1cf981d07c87774).
+INFO : 2020-12-08 09:44:03,552 : [はらたく#3270] [テスト] | nick ka
+INFO : 2020-12-08 09:50:55,764 : logging in using static token
+INFO : 2020-12-08 09:50:56,099 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 09:50:56,244 : Shard ID None has connected to Gateway: ["gateway-prd-main-vl2d",{"micros":102008,"calls":["discord-sessions-prd-2-59",{"micros":101203,"calls":["start_session",{"micros":81441,"calls":["api-prd-main-b237",{"micros":78363,"calls":["get_user",{"micros":3454},"add_authorized_ip",{"micros":7781},"get_guilds",{"micros":13074},"coros_wait",{"micros":2}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":12543,"calls":[]}]}]}] (Session ID: 87a8cd8ca10aeea0fc0388b135102e79).
+INFO : 2020-12-08 09:51:12,774 : [はらたく#3270] [🗒｜成績情報] | /roles
+INFO : 2020-12-08 09:51:29,065 : logging in using static token
+INFO : 2020-12-08 09:51:29,303 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 09:51:29,425 : Shard ID None has connected to Gateway: ["gateway-prd-main-9lhs",{"micros":78960,"calls":["discord-sessions-prd-2-78",{"micros":78034,"calls":["start_session",{"micros":77054,"calls":["api-prd-main-n7rg",{"micros":74512,"calls":["get_user",{"micros":8714},"add_authorized_ip",{"micros":2937},"get_guilds",{"micros":14260},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":3,"calls":[]}]}]}] (Session ID: 119b398442a35da84ee6313dfa3719e0).
+INFO : 2020-12-08 09:51:41,680 : [はらたく#3270] [🗒｜成績情報] | /roles
+INFO : 2020-12-08 09:51:55,158 : logging in using static token
+INFO : 2020-12-08 09:51:55,443 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 09:51:55,521 : Shard ID None has connected to Gateway: ["gateway-prd-main-gbmp",{"micros":35693,"calls":["discord-sessions-prd-2-79",{"micros":34147,"calls":["start_session",{"micros":27001,"calls":["api-prd-main-s5t6",{"micros":24593,"calls":["get_user",{"micros":2753},"add_authorized_ip",{"micros":1427},"get_guilds",{"micros":4123},"coros_wait",{"micros":2}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":1701,"calls":[]}]}]}] (Session ID: 6894f9d8649d9de74a02f9c25c85c350).
+INFO : 2020-12-08 09:52:04,481 : [はらたく#3270] [🗒｜成績情報] | /roles
+INFO : 2020-12-08 09:56:12,088 : [はらたく#3270] [テスト] | /members
+INFO : 2020-12-08 10:38:41,780 : logging in using static token
+INFO : 2020-12-08 10:38:42,031 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 10:38:42,227 : Shard ID None has connected to Gateway: ["gateway-prd-main-kk2f",{"micros":141302,"calls":["discord-sessions-prd-2-110",{"micros":136482,"calls":["start_session",{"micros":50495,"calls":["api-prd-main-cxl1",{"micros":47609,"calls":["get_user",{"micros":2429},"add_authorized_ip",{"micros":1424},"get_guilds",{"micros":3330},"coros_wait",{"micros":0}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":36691,"calls":[]}]}]}] (Session ID: 9cc8fa3793c125dce3cd835a0f992cb3).
+INFO : 2020-12-08 10:41:16,179 : logging in using static token
+INFO : 2020-12-08 10:41:16,473 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-08 10:41:16,627 : Shard ID None has connected to Gateway: ["gateway-prd-main-tfnb",{"micros":112531,"calls":["discord-sessions-prd-2-30",{"micros":110000,"calls":["start_session",{"micros":27991,"calls":["api-prd-main-z0jg",{"micros":25260,"calls":["get_user",{"micros":2142},"add_authorized_ip",{"micros":1840},"get_guilds",{"micros":4043},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":54634,"calls":[]}]}]}] (Session ID: f1337bb088e3bca6e8f62249ef12fd0e).
+INFO : 2020-12-08 10:41:19,633 : Cleaning up tasks.
+INFO : 2020-12-08 10:41:19,633 : Cleaning up after 1 tasks.
+INFO : 2020-12-09 07:40:18,496 : logging in using static token
+INFO : 2020-12-09 07:40:18,761 : Shard ID None has sent the IDENTIFY payload.
+INFO : 2020-12-09 07:40:18,919 : Shard ID None has connected to Gateway: ["gateway-prd-main-kk2f",{"micros":104376,"calls":["discord-sessions-prd-2-88",{"micros":98892,"calls":["start_session",{"micros":34826,"calls":["api-prd-main-lzgj",{"micros":31708,"calls":["get_user",{"micros":7098},"add_authorized_ip",{"micros":1551},"get_guilds",{"micros":5551},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":18977,"calls":[]}]}]}] (Session ID: b23346fe3eab9c53aec8cbcc0709d40d).
