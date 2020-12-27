@@ -8,6 +8,7 @@ authors = ["repl.it user <replituser@example.com>"]
 python = "^3.8"
 discord = "^1.0.1"
 flask = "^1.1.2"
+youtube-dl = "^2020.12.26"
 
 [tool.poetry.dev-dependencies]
 
