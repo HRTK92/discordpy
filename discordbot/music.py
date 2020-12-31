@@ -315,7 +315,7 @@ class Music(commands.Cog):
 
 	@commands.command(name='join', invoke_without_subcommand=True)
 	async def _join(self, ctx: commands.Context):
-		"""Joins a voice channel."""
+		"""ボイスチャットに参加する"""
 
 		destination = ctx.author.voice.channel
 		if ctx.voice_state.voice:
@@ -350,7 +350,7 @@ class Music(commands.Cog):
 	@commands.command(name='leave', aliases=['disconnect'])
 	@commands.has_permissions(manage_guild=True)
 	async def _leave(self, ctx: commands.Context):
-		"""Clears the queue and leaves the voice channel."""
+		"""ボイスチャットから抜ける"""
 
 		if not ctx.voice_state.voice:
 			return await ctx.send('Not connected to any voice channel.')
@@ -360,7 +360,7 @@ class Music(commands.Cog):
 
 	@commands.command(name='volume')
 	async def _volume(self, ctx: commands.Context, *, volume: int):
-		"""Sets the volume of the player."""
+		"""音量を調整する"""
 
 		if not ctx.voice_state.is_playing:
 			return await ctx.send('Nothing being played at the moment.')
@@ -398,7 +398,7 @@ class Music(commands.Cog):
 	@commands.command(name='stop')
 	@commands.has_permissions(manage_guild=True)
 	async def _stop(self, ctx: commands.Context):
-		"""Stops playing song and clears the queue."""
+		"""再生してる曲を停止します"""
 
 		ctx.voice_state.songs.clear()
 
@@ -497,7 +497,7 @@ class Music(commands.Cog):
 
 	@commands.command(name='play')
 	async def _play(self, ctx: commands.Context, *, search: str):
-		"""Plays a song.
+		"""曲を再生する play <youtubeのURL>
 
         If there are songs in the queue, this will be queued until the
         other songs finished playing.
@@ -536,4 +536,3 @@ class Music(commands.Cog):
 				    'Bot is already in a voice channel.')
 
 bot = commands.Bot('music.', description='Yet another music bot.')
-bot.add_cog(Music(bot))
