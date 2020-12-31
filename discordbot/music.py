@@ -535,14 +535,5 @@ class Music(commands.Cog):
 				raise commands.CommandError(
 				    'Bot is already in a voice channel.')
 
-
 bot = commands.Bot('music.', description='Yet another music bot.')
 bot.add_cog(Music(bot))
-
-
-@bot.event
-async def on_ready():
-	print('Logged in as:\n{0.user.name}\n{0.user.id}'.format(bot))
-
-def setup():
-  bot.run("NzQzNzc2ODI1MTMzNjI5NTQw.XzZmJQ.4Cer4_pQghZHCtDwqHjzu8nPrec")

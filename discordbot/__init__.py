@@ -1,2 +1,2 @@
-from . import bot
+from .bot import Mybot 
 from . import music
