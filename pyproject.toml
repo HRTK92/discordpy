@@ -9,6 +9,7 @@ python = "^3.8"
 discord = "^1.0.1"
 youtube-dl = "^2020.12.26"
 bson = "^0.5.10"
+gtts = "^2.2.1"
 
 [tool.poetry.dev-dependencies]
 

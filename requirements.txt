@@ -4,3 +4,4 @@ sanic
 requests
 Pillow
 youtube-dl
+gTTS
