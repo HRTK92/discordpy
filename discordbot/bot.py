@@ -1,7 +1,6 @@
 import discord
 import sys
 import platform
-from flask import Flask, request
 import json
 from PIL import Image, ImageDraw
 import datetime
@@ -11,15 +10,17 @@ from . import music
 
 from discord.ext import commands
 
-json_open_confing = open('confing.json', 'r')
-confing = json.load(json_open_confing)
+json_open_config = open('config.json', 'r')
+config = json.load(json_open_config)
 json_open_message = open('message.json', 'r')
 message_template = json.load(json_open_message)
 
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
 
-formatter = '%(levelname)s : %(asctime)s : %(message)s'
-logging.basicConfig(
-    filename='logger.log', level=logging.INFO, format=formatter)
 prefix = '.'
 
 #discord
@@ -30,17 +31,22 @@ class Mybot(commands.Bot):
     super().__init__(
       command_prefix=".",
       owner_id=618332297275375636,
-      activity=discord.Activity(name=confing["activity"], type=discord.ActivityType.watching),
+      activity=discord.Activity(name=config["activity"], type=discord.ActivityType.watching),
       help_command=JapaneseHelpCommand()
       )
   async def on_ready(self):
     print("-----------------------")
     print('ログインしました')
     print(f'ユーザー名:{self.user}')
-    print(f'アクティビティ:{confing["activity"]}')
+    print(f'アクティビティ:{config["activity"]}')
     print(f'python {platform.python_version()}')
     print("discord.py " + discord.__version__)
     print(f'\n')
+  async def on_member_join(self, member):
+    channel_id = config["servers"][str(member.guild.id)]["channels"]["Notice"]
+    channel = self.bot.get_channel(channel_id)
+    await channel.send(f'{member.display_name}、ようこそサーバーへ\nサーバー管理者<@618332297275375636>\ndiscord.gg/vXgDnP7')
+    
     
 
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
