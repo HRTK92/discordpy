@@ -48,7 +48,7 @@ class Commands_fn(commands.Cog, name='fortnite'):
 			    f'[fortnitetracker](https://fortnitetracker.com/profile/all/{joinedArgs})'
 			)
 			embed.set_image(url=image)
-			embed.set_footer(text=f'送信者:{ctx.author}')
+			embed.set_footer(text=f'送信者:{ctx.author.display_name}')
 			await edit.edit(content="", embed=embed)
 		if response.status_code == 404:
 			text = f'Fortnite プレイヤー成績情報 : [{joinedArgs}]'
@@ -56,10 +56,10 @@ class Commands_fn(commands.Cog, name='fortnite'):
 			embed.add_field(
 			    name="読み込みに失敗しました(status_code 404)",
 			    value=f'内容:{geted["error"]}')
-			embed.set_footer(text=f'送信者:{ctx.author}')
+			embed.set_footer(text=f'送信者:{ctx.author.display_name}')
 			await edit.edit(content="", embed=embed)
 		if ctx.channel.id == 794100709271535646:
-		  send = False
+		  send = True
 		  if send :
 		    time.sleep(2)
 		    embed=discord.Embed(title="使い方", description="```.fn <ユーザー名>```Fortniteの成績を表示します", color=0x4273b5)
