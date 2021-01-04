@@ -1,7 +1,5 @@
 discord.py[voice]
 datetime
-sanic
 requests
-Pillow
 youtube-dl
 gTTS

@@ -2,7 +2,6 @@ import discord
 import sys
 import platform
 import json
-from PIL import Image, ImageDraw
 import datetime
 import requests
 import logging

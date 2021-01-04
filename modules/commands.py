@@ -27,6 +27,6 @@ class Commands(commands.Cog, name='コマンド'):
 	async def speak(self, ctx,*args):
 	  tts_ja = gTTS(text=args[0], lang='ja', slow=False)
 	  tts_ja.save("text.mp3")
-	  ctx.guild.voice_client.play(tts_ja)
+      
     
 
