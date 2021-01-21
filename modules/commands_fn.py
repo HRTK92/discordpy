@@ -31,6 +31,7 @@ class Commands_fn(commands.Cog, name='fortnite'):
 	@commands.command()
 	async def fn(self, ctx, *args):
 		"""Fortnite 成績を表示する fn <ユーザー名>"""
+		await ctx.message.delete()
 		joinedArgs = ('+'.join(args))
 		edit = await ctx.send(f'{joinedArgs}のデータを取得中……')
 		res_lang = "ja"

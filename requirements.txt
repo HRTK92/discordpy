@@ -4,3 +4,4 @@ requests
 youtube-dl
 gTTS
 urllib3
+feedparser

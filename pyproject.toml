@@ -15,6 +15,7 @@ gtts = "^2.2.1"
 youtube-dl = "^2021.1.16"
 async-timeout = "^3.0.1"
 pytz = "^2020.5"
+feedparser = "^6.0.2"
 
 [tool.poetry.dev-dependencies]
 

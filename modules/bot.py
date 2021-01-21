@@ -22,10 +22,6 @@ logger.addHandler(handler)
 
 prefix = '.'
 
-#discord
-print("ログインしています……\n")
-
-
 class Mybot(commands.Bot):
 	def __init__(self) -> None:
 		intents = discord.Intents.default()
@@ -51,11 +47,11 @@ class Mybot(commands.Bot):
 			to_send = f'{member.mention}ようこそ サーバーへ\nサーバー管理者 <@618332297275375636> \nhttps://discord.gg/vXgDnP7'
 			await guild.system_channel.send(to_send)
 		channel = guild.get_channel(636457818110820362)
-		await channel.edit(name=f"メンバー数:{guild.member_count}")
+		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
 	async def on_member_remove(self, member):
 		guild = member.guild
 		channel = guild.get_channel(636457818110820362)
-		await channel.edit(name=f"メンバー数:{guild.member_count}")
+		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
 	async def on_member_update(self, before, after):
 	  pass
 
