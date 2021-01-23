@@ -5,3 +5,6 @@ youtube-dl
 gTTS
 urllib3
 feedparser
+disputils
+chess
+fortnite-api

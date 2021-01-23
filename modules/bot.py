@@ -13,14 +13,10 @@ json_open_config = open('config/config.json', 'r')
 config = json.load(json_open_config)
 
 logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(
-    filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(
-    logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 prefix = '.'
+
 
 class Mybot(commands.Bot):
 	def __init__(self) -> None:
@@ -41,6 +37,7 @@ class Mybot(commands.Bot):
 		print(f'ユーザー名:{self.user}')
 		print(f'アクティビティ:{config["activity"]}')
 		print(f'\n')
+
 	async def on_member_join(self, member):
 		guild = member.guild
 		if guild.system_channel is not None:
@@ -48,12 +45,18 @@ class Mybot(commands.Bot):
 			await guild.system_channel.send(to_send)
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
+
 	async def on_member_remove(self, member):
 		guild = member.guild
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
+
 	async def on_member_update(self, before, after):
-	  pass
+		pass
+
+	#reaction
+	async def on_raw_reaction_add(payload):
+		print("、")
 
 
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
@@ -64,8 +67,14 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 		self.command_attrs["help"] = "コマンド一覧と簡単な説明を表示"
 
 	def get_ending_note(self):
-		return (f"プレフィックス {prefix}\n各コマンドの説明: {prefix}help <コマンド名>\n"
-		        f"各カテゴリの説明: {prefix}help <カテゴリ名>\n")
+		return (
+		    f"プレフィックス {prefix}\n各コマンドの説明: {prefix}help <コマンド名>\n"
+		    f"各カテゴリの説明: {prefix}help <カテゴリ名>\n\n\ndiscord.py: {discord.__version__}"
+		)
+
+
+class PagerWithEmojis:
+  pass
 
 
 def setup():

@@ -9,6 +9,4 @@ class Commands_test(commands.Cog, name='テスト'):
 		self.bot = bot
 	@commands.command()
 	async def test(self, ctx):
-	  guild = ctx.guild
-	  role = discord.utils.get(guild.roles, name="@everyone")
-	  print(role.id)
+	  await ctx.send(self.bot)

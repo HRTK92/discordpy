@@ -77,6 +77,14 @@ version = "3.0.4"
 
 [[package]]
 category = "main"
+description = "A pure Python chess library with move generation and validation, Polyglot opening book probing, PGN reading and writing, Gaviota tablebase probing, Syzygy tablebase probing and XBoard/UCI engine communication."
+name = "chess"
+optional = false
+python-versions = ">=3.7"
+version = "1.3.3"
+
+[[package]]
+category = "main"
 description = "Composable command line interface toolkit"
 name = "click"
 optional = false
@@ -108,6 +116,17 @@ aiohttp = ">=3.6.0,<3.8.0"
 [package.extras]
 docs = ["sphinx (3.0.3)", "sphinxcontrib-trio (1.1.2)", "sphinxcontrib-websupport"]
 voice = ["PyNaCl (>=1.3.0,<1.5)"]
+
+[[package]]
+category = "main"
+description = "Some utilities for discord.py. Making Discord bot development easier."
+name = "disputils"
+optional = false
+python-versions = ">=3.6"
+version = "0.1.3"
+
+[package.dependencies]
+"discord.py" = ">=1,<2"
 
 [[package]]
 category = "main"
@@ -254,6 +273,17 @@ version = "0.6.1"
 
 [[package]]
 category = "main"
+description = "A chess library with move generation, move validation, and support for common formats."
+name = "python-chess"
+optional = false
+python-versions = "*"
+version = "1.999"
+
+[package.dependencies]
+chess = ">=1,<2"
+
+[[package]]
+category = "main"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -379,7 +409,7 @@ python-versions = "*"
 version = "2021.1.16"
 
 [metadata]
-content-hash = "dd26454a2f8a475cf8dc2c63183a016ae475e84a68c2b91d9f71ac757e5fbb41"
+content-hash = "39d9619f4a803e257ff1ff9ff494f6b25e647a101e5b89bc673e5345f48c8c90"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -442,6 +472,10 @@ chardet = [
     {file = "chardet-3.0.4-py2.py3-none-any.whl", hash = "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"},
     {file = "chardet-3.0.4.tar.gz", hash = "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae"},
 ]
+chess = [
+    {file = "chess-1.3.3-py3-none-any.whl", hash = "sha256:961fd5fe8a555758674d8997514fdf7a158885c31720de80564368864bb2a369"},
+    {file = "chess-1.3.3.tar.gz", hash = "sha256:27920121dff243f88de2806f6364c9a9eaa67af59c1f183251c03ffdde4e0ac2"},
+]
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
@@ -453,6 +487,10 @@ discord = [
 "discord.py" = [
     {file = "discord.py-1.6.0-py3-none-any.whl", hash = "sha256:3df148daf6fbcc7ab5b11042368a3cd5f7b730b62f09fb5d3cbceff59bcfbb12"},
     {file = "discord.py-1.6.0.tar.gz", hash = "sha256:ba8be99ff1b8c616f7b6dcb700460d0222b29d4c11048e74366954c465fdd05f"},
+]
+disputils = [
+    {file = "disputils-0.1.3-py3-none-any.whl", hash = "sha256:d80c29b68a58cd45660388edd3031dbf92072d1d2e163e2810935687b7547217"},
+    {file = "disputils-0.1.3.tar.gz", hash = "sha256:ea05bac8239e3b8dabfa10db9378c3ccd3b26522d659ec9f386e39edd55be372"},
 ]
 feedparser = [
     {file = "feedparser-6.0.2-py3-none-any.whl", hash = "sha256:f596c4b34fb3e2dc7e6ac3a8191603841e8d5d267210064e94d4238737452ddd"},
@@ -607,6 +645,10 @@ pdfkit = [
     {file = "pdfkit-0.6.1-py2.7.egg", hash = "sha256:a315a665c266db28fb751891d0661fe5e750ced812cb4eadb3ce63afba9a7475"},
     {file = "pdfkit-0.6.1-py3-none-any.whl", hash = "sha256:05f1c631e8d9ab877886955da825e48b459e097886a21448ab17b34c60cfd66c"},
     {file = "pdfkit-0.6.1.tar.gz", hash = "sha256:ef1da35b78d534197e7ce4a604a4a190e9aa769e56634957535f3479a50d8cd1"},
+]
+python-chess = [
+    {file = "python-chess-1.999.tar.gz", hash = "sha256:8cad0388c42242d890ac6368ad64def15cd0165db033df0ad479492e266e5e6c"},
+    {file = "python_chess-1.999-py3-none-any.whl", hash = "sha256:93b562f8f1124cb7bf56fb095e18743758e69dc6a028ccda0badcaa5c59d88c8"},
 ]
 pytz = [
     {file = "pytz-2020.5-py2.py3-none-any.whl", hash = "sha256:16962c5fb8db4a8f63a26646d8886e9d769b6c511543557bc84e9569fb9a9cb4"},
