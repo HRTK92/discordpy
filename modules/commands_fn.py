@@ -3,6 +3,7 @@ import requests
 from discord.ext import commands
 import time
 import asyncio
+import aiohttp
 import fortnite_api
 import feedparser
 from .bot import PagerWithEmojis
@@ -26,9 +27,9 @@ class Commands_fn(commands.Cog, name='fortnite'):
 	async def news(self, ctx):
 		"""Fortnite Newsを表示する"""
 		res_lang = "ja"
-		response = requests.get(
-		    f'https://fortnite-api.com/v2/news/br?language={res_lang}')
-		geted = response.json()
+		async with aiohttp.ClientSession() as session:
+		  async with session.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}') as response:
+		    geted = response.json()
 		if response.status_code == 200:
 			text = "Fortnite News"
 			image = geted['data']['image']
@@ -43,10 +44,9 @@ class Commands_fn(commands.Cog, name='fortnite'):
 		joinedArgs = ('+'.join(args))
 		edit = await ctx.send(f'{joinedArgs}のデータを取得中……')
 		res_lang = "ja"
-		response = requests.get(
-		    f'https://fortnite-api.com/v1/stats/br/v2?name={joinedArgs}&image=all'
-		)
-		geted = response.json()
+		async with aiohttp.ClientSession() as session:
+        async with session.get(f'https://fortnite-api.com/v1/stats/br/v2?name={joinedArgs}&image=all') as response:
+          geted = response.json()
 		if response.status_code == 200:
 			text = f'Fortnite プレイヤー成績情報 : [{joinedArgs}]'
 			image = geted['data']['image']
@@ -86,13 +86,6 @@ class Commands_fn(commands.Cog, name='fortnite'):
 		data = ""
 		for entry in d.entries:
 			data = data + f'[{entry.title}]({entry.link})\n'
-			await asyncio.sleep(1)
-			embed = discord.Embed(title=f'{entry.title}', color=0x00ff00)
-			embed.add_field(
-			    name="description",
-			    value=f'{entry.description}\n\n[リンク]({entry.link})')
-			embed.set_footer(text=f'送信者:{ctx.author.display_name}')
-			message = await ctx.send(embed=embed)
 		embed = discord.Embed(title=f'fnjpnews.com', color=0x00ff00)
 		embed.add_field(name="一覧" ,value=data)
 		await ctx.send(embed=embed)

@@ -6,7 +6,7 @@ import datetime
 import requests
 import logging
 from . import music
-
+import asyncio
 from discord.ext import commands
 
 json_open_config = open('config/config.json', 'r')
@@ -16,7 +16,7 @@ logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)
 
 prefix = '.'
-
+loop = asyncio.get_event_loop()
 
 class Mybot(commands.Bot):
 	def __init__(self) -> None:
@@ -24,6 +24,7 @@ class Mybot(commands.Bot):
 		intents.members = True
 		super().__init__(
 		    command_prefix=".",
+		    loop=loop,
 		    intents=discord.Intents.all(),
 		    #intents=intents,
 		    owner_id=618332297275375636,
