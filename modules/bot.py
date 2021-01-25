@@ -8,6 +8,7 @@ import logging
 from . import music
 import asyncio
 from discord.ext import commands
+from .web import setup
 
 json_open_config = open('config/config.json', 'r')
 config = json.load(json_open_config)
@@ -38,7 +39,8 @@ class Mybot(commands.Bot):
 		print(f'ユーザー名:{self.user}')
 		print(f'アクティビティ:{config["activity"]}')
 		print(f'\n')
-
+	async def on_message(self, message):
+	  print(f'[{message.guild.name}] [{message.channel.name}]｜{message.author.nick} : {message.content}')
 	async def on_member_join(self, member):
 		guild = member.guild
 		if guild.system_channel is not None:
@@ -56,7 +58,7 @@ class Mybot(commands.Bot):
 		pass
 
 	#reaction
-	async def on_raw_reaction_add(payload):
+	async def on_raw_reaction_add(self, payload):
 		print("、")
 
 

@@ -1,13 +1,12 @@
-import sanic
-from sanic import Sanic
-from sanic.response import json
-import asyncio
-app = Sanic()
+from aiohttp import web
 
-@app.route('/')
-async def test(request):
-    return json({'hello': 'world'})
 
-def setup():
-    #app.run(host='0.0.0.0', port=8000, loop = asyncio.get_event_loop())
-    pass
+async def handle(request):
+	name = request.match_info.get('name', "Anonymous")
+	text = "Hello, " + name
+	return web.Response(text=text)
+
+async def setup():
+  app = web.Application()
+  app.add_routes([web.get('/', handle), web.get('/{name}', handle)])
+  await web.run_app(app)

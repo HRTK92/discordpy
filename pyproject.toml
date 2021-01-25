@@ -6,7 +6,6 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-line-bot-sdk = "^1.17.0"
 bs4 = "^0.0.1"
 scrape = "^0.10.1"
 discord = "^1.0.1"

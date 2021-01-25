@@ -4,11 +4,8 @@ from discord.ext import commands
 import time
 import asyncio
 import aiohttp
-import fortnite_api
 import feedparser
 from .bot import PagerWithEmojis
-
-api = fortnite_api.FortniteAPI(api_key="")
 
 
 class Commands_fn(commands.Cog, name='fortnite'):
@@ -45,8 +42,8 @@ class Commands_fn(commands.Cog, name='fortnite'):
 		edit = await ctx.send(f'{joinedArgs}のデータを取得中……')
 		res_lang = "ja"
 		async with aiohttp.ClientSession() as session:
-        async with session.get(f'https://fortnite-api.com/v1/stats/br/v2?name={joinedArgs}&image=all') as response:
-          geted = response.json()
+		  async with session.get(f'https://fortnite-api.com/v1/stats/br/v2?name={joinedArgs}&image=all') as response:
+		    geted = response.json()
 		if response.status_code == 200:
 			text = f'Fortnite プレイヤー成績情報 : [{joinedArgs}]'
 			image = geted['data']['image']

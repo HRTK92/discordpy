@@ -7,8 +7,5 @@ urllib3
 feedparser
 disputils
 
-fortnite-api
-
-asyncio
 aiohttp
 aiofile

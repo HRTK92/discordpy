@@ -19,4 +19,5 @@ print("discord.py " + discord.__version__)
 loop = asyncio.get_event_loop()
 
 #loop.run_until_complete(modules.setup())
-loop.run_until_complete(client.run(config["TOKEN"]))
+
+loop.run_until_complete(client.run("NzQzNzc2ODI1MTMzNjI5NTQw.XzZmJQ.4Cer4_pQghZHCtDwqHjzu8nPrec"))
