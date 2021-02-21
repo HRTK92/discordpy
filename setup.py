@@ -6,14 +6,14 @@ def _requires_from_file(filename):
     return open(filename).read().splitlines()
 
 setuptools.setup(
-    name="fnbot",
+    name="discord",
     version="0.1.0",
     author="HRTK92",
     author_email="　",
     description="You can receive the message 'Hello!!!'",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/HRTK92/fnbot/",
+    url="https://github.com/HRTK92/discordpy/",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
