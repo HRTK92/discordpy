@@ -6,4 +6,4 @@ from .commands_fn import Commands_fn
 from .commands_test import Commands_test
 from .music import Music
 from .poll import Poll
-from .web import setup
+from .setup import start
