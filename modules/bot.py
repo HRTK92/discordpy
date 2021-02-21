@@ -10,7 +10,7 @@ import asyncio
 from discord.ext import commands
 from .web import setup
 
-json_open_config = open('config/config.json', 'r')
+json_open_config = open('config.json', 'r')
 config = json.load(json_open_config)
 
 logger = logging.getLogger('discord')
