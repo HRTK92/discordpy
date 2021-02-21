@@ -78,8 +78,3 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 
 class PagerWithEmojis:
   pass
-
-
-def setup():
-	client = Mybot()
-	client.run('NzQzNzc2ODI1MTMzNjI5NTQw.XzZmJQ.4Cer4_pQghZHCtDwqHjzu8nPrec')
