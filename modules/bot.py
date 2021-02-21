@@ -39,8 +39,8 @@ class Mybot(commands.Bot):
 		print(f'ユーザー名:{self.user}')
 		print(f'アクティビティ:{config["activity"]}')
 		print(f'\n')
-	async def on_message(self, message):
-	  print(f'[{message.guild.name}] [{message.channel.name}]｜{message.author.nick} : {message.content}')
+	#async def on_message(self, message):
+		#print(f'[{message.guild.name}] [{message.channel.name}]｜{message.author.nick} : {message.content}')
 	async def on_member_join(self, member):
 		guild = member.guild
 		if guild.system_channel is not None:
