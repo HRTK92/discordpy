@@ -1,8 +1,8 @@
-# fnbot
+# discordpy
 ***
-#install
+# install
 ```
-pip install git+https://github.com/HRTK92/fnbot/
+pip install git+https://github.com/HRTK92/discordpy
 ```
 
 ```py
