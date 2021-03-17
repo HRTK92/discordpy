@@ -5,7 +5,6 @@ import time
 import asyncio
 import aiohttp
 import feedparser
-from .bot import PagerWithEmojis
 
 
 class Commands_fn(commands.Cog, name='fortnite'):

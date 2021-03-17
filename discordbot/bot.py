@@ -9,27 +9,26 @@ from . import music
 import asyncio
 from discord.ext import commands
 from sanic import Sanic
-from sanic.response import json
+from sanic.response import json as sjson
 app = Sanic(__name__)
 
-json_open_config = open('config.json', 'r')
+json_open_config = open('config/config.json', 'r')
 config = json.load(json_open_config)
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)
 
-prefix = '.'
 loop = asyncio.get_event_loop()
 
 class Mybot(commands.Bot):
 	def __init__(self) -> None:
+		self.config = config,
 		intents = discord.Intents.default()
 		intents.members = True
 		super().__init__(
-		    command_prefix=".",
+		    command_prefix=config["command_prefix"],
 		    loop=loop,
 		    intents=discord.Intents.all(),
-		    #intents=intents,
 		    owner_id=618332297275375636,
 		    activity=discord.Activity(
 		        name=config["activity"], type=discord.ActivityType.watching),
@@ -41,8 +40,7 @@ class Mybot(commands.Bot):
 		print(f'ユーザー名:{self.user}')
 		print(f'アクティビティ:{config["activity"]}')
 		print(f'\n')
-	#async def on_message(self, message):
-		#print(f'[{message.guild.name}] [{message.channel.name}]｜{message.author.nick} : {message.content}')
+		
 	async def on_member_join(self, member):
 		guild = member.guild
 		if guild.system_channel is not None:
@@ -50,7 +48,7 @@ class Mybot(commands.Bot):
 			await guild.system_channel.send(to_send)
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
-		await app.create_server(host="0.0.0.0", port=8080, return_asyncio_server=True)
+		#await app.create_server(host="0.0.0.0", port=8000, return_asyncio_server=True)
 
 	async def on_member_remove(self, member):
 		guild = member.guild
@@ -81,4 +79,4 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 
 @app.route("/")
 async def test(request):
-    return json({"hello": "world"})
+    return sjson({"hello": "world"})

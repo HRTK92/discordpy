@@ -1,4 +1,4 @@
-from .bot import Mybot, PagerWithEmojis
+from .bot import Mybot
 from . import bot
 from .commands import Commands
 from .commands_channel import Commands_ch
