@@ -8,7 +8,8 @@ import logging
 from . import music
 import asyncio
 from discord.ext import commands
-from .web import setup
+
+app = Sanic(__name__)
 
 json_open_config = open('config.json', 'r')
 config = json.load(json_open_config)
@@ -48,6 +49,7 @@ class Mybot(commands.Bot):
 			await guild.system_channel.send(to_send)
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
+		await app.create_server(host="0.0.0.0", port=8080, return_asyncio_server=True)
 
 	async def on_member_remove(self, member):
 		guild = member.guild
