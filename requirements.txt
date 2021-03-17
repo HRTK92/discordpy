@@ -6,6 +6,6 @@ gTTS
 urllib3
 feedparser
 disputils
-
+sanic
 aiohttp
 aiofile
