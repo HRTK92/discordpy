@@ -9,6 +9,7 @@ from . import music
 import asyncio
 from discord.ext import commands
 from sanic import Sanic
+from sanic.response import json
 app = Sanic(__name__)
 
 json_open_config = open('config.json', 'r')
@@ -78,5 +79,6 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 		)
 
 
-class PagerWithEmojis:
-  pass
+@app.route("/")
+async def test(request):
+    return json({"hello": "world"})
