@@ -8,9 +8,7 @@ import logging
 from . import music
 import asyncio
 from discord.ext import commands
-from sanic import Sanic
-from sanic.response import json as sjson
-app = Sanic(__name__)
+
 
 json_open_config = open('config/config.json', 'r')
 config = json.load(json_open_config)
@@ -76,7 +74,7 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 		    f"各カテゴリの説明: {prefix}help <カテゴリ名>\n\n\ndiscord.py: {discord.__version__}"
 		)
 
-
+"""
 @app.route("/")
 async def test(request):
-    return sjson({"hello": "world"})
+    return sjson({"hello": "world"})"""
