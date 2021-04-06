@@ -5,7 +5,7 @@ import time
 import asyncio
 import aiohttp
 import feedparser
-
+from discord_slash import SlashCommand, SlashContext
 
 class Commands_fn(commands.Cog, name='fortnite'):
 	def __init__(self, bot):

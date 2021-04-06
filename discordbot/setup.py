@@ -2,6 +2,7 @@ import asyncio
 import json
 import platform
 import discord
+from discord_slash import SlashCommand, SlashContext
 
 import discordbot
 
@@ -19,4 +20,4 @@ def start(token):
   print("discord.py " + discord.__version__)
   print('discord.py Rapptz')
   loop = asyncio.get_event_loop()
-  loop.run_until_complete(client.start(token))
+  loop.run_until_complete(client.run(token))

@@ -11,6 +11,7 @@ from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
 from sanic import Sanic
 from sanic.response import json as sanic_json
+import datetime
 
 app = Sanic(__name__)
 @app.route('/')
@@ -30,6 +31,7 @@ loop = asyncio.get_event_loop()
 class Mybot(commands.Bot):
 	def __init__(self) -> None:
 		self.config = config,
+		self.message = f'[bot] [{datetime.datetime.now().strftime("%H:%M:%S")}] '
 		intents = discord.Intents.default()
 		intents.members = True
 		super().__init__(
@@ -45,14 +47,14 @@ class Mybot(commands.Bot):
 		print("-----------------------")
 		print('ログインしました')
 		print(f'ユーザー名:{self.user}')
-		print(f'アクティビティ:{config["activity"]}')
-		print(f'\n')
+		print(f'アクティビティ:{self.activity}')
+		slash = SlashCommand(self, override_type = True)
 		#await app.create_server(host='0.0.0.0', return_asyncio_server=True)
 		
 	async def on_message(self, message):
 	  if message.author.bot:
 	    return
-	  print(f"{message.author.name}｜{message.content}")
+	  print(f"{self.message}{message.author.name}｜{message.content}")
 	  await self.process_commands(message)
 		
 	async def on_member_join(self, member):
@@ -74,7 +76,11 @@ class Mybot(commands.Bot):
 
 	#reaction
 	async def on_raw_reaction_add(self, payload):
-		print("、")
+		print(payload)
+		
+	async def bot_activity():
+	  url = "https://www.warera.ml/"
+	  await bot.change_presence(activity=discord.Streaming(name="My Stream", url=url))
 
 
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
