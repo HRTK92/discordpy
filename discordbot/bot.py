@@ -76,8 +76,8 @@ class Mybot(commands.Bot):
 
 	#reaction
 	async def on_raw_reaction_add(self, payload):
-		print(payload)
-		
+		print(self.message, payload)
+
 	async def bot_activity():
 	  url = "https://www.warera.ml/"
 	  await bot.change_presence(activity=discord.Streaming(name="My Stream", url=url))

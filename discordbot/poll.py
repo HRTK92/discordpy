@@ -8,13 +8,21 @@ class Poll(commands.Cog, name='投票'):
 	def __init__(self, bot):
 		self.bot = bot
 	@commands.command()
-	async def poll(self, ctx,*args):
-	  poll_list = ""
-	  poll_number = 0
-	  for i in args:
-	    poll_number + 1
-	    poll_list += f'{poll_number}、{i}  '
-	  embed=discord.Embed(title=f'投票 : {args[0]}', description="説明", color=0xe600ff)
-	  embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-	  await ctx.send(embed=embed)
-	  
+	async def poll(self, ctx,question, *options: str):
+	  if len(options) <= 1:
+	    await ctx.send('You need more than one option to make a poll!')
+	    return
+	  if len(options) > 10:
+	    await ctx.send('You cannot make a poll for more than 10 things!')
+	    return
+	  if len(options) == 2 and options[0] == 'yes' and options[1] == 'no':
+	    reactions = ['✅', '❌']
+	  else:
+	    reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟']
+	  description = []
+	  for x, option in enumerate(options):
+	    description += '\n {} {}'.format(reactions[x], option)
+	  embed = discord.Embed(title=question, description=''.join(description))
+	  react_message = await ctx.send(embed=embed)
+	  for reaction in reactions[:len(options)]:
+	    await react_message.add_reaction(reaction)
