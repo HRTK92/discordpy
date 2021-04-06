@@ -10,7 +10,10 @@ import json
 import pytz
 import feedparser
 import asyncio
-
+import subprocess
+import aiohttp, requests
+    
+    
 async def is_owner(ctx):
 	return ctx.author.id == 618332297275375636
 
@@ -28,10 +31,10 @@ class Commands(commands.Cog, name='コマンド'):
 
 
 	@commands.command()
-	@commands.check(is_owner)
 	async def speak(self, ctx, *args):
 		tts_ja = gTTS(text=args[0], lang='ja', slow=False)
 		tts_ja.save("text.mp3")
+		
 
 	@commands.command()
 	@commands.check(is_owner)
@@ -67,11 +70,35 @@ class Commands(commands.Cog, name='コマンド'):
 	async def role_members(self, ctx, *args):
 	  guild = self.bot.get_guild(ctx.guild.id)
 	  role = guild.get_role(int(args[0]))
+	  embed=discord.Embed(title=f"ロール:{role.name}",description=f"{role.id}", color=0x00ff00)
 	  members = ""
 	  for data in role.members:
 	    members = members+f"{data.name}\n"
-	  await ctx.send(members)
+	  embed.add_field(name="人数", value=f"{len(role.members)}", inline=False)
+	  embed.add_field(name="リスト", value=f"{members}", inline=False)
+	  await ctx.send(embed=embed)
 	  
 	@commands.command()
 	async def role_add(self, ctx, *args):
 	  pass
+	@commands.command(name="マイクラルール")
+	async def mc_rule(self, ctx, *args):
+	  url = "https://raw.githubusercontent.com/HRTK92/HR.Snow-World/main/rule.txt"
+	  response = requests.get(url)
+	  embed=discord.Embed(title="HR.Snowの世界-ルール", url=url, description=response.text, timestamp=datetime.datetime.utcnow(), color=0x00ffff)
+	  #embed.add_field(name="undefined", value=response.text, inline=False)
+	  embed.set_author(name="HRTK92", url="https://github.com/HRTK92", icon_url="https://avatars.githubusercontent.com/u/70054655?s=64&v=4")
+	  embed.set_footer(text="最終更新時間")
+	  await ctx.message.delete()
+	  await ctx.send(embed=embed)
+	  
+	@commands.command(name="やる事リスト")
+	async def todo(self, ctx, *args):
+	  url = "https://api.github.com/repos/HRTK92/HR.Snow-World/projects?"
+	  response = requests.get(url, headers={"Accept" : "application/vnd.github.inertia-preview+json"})
+	  embed=discord.Embed(title="HR.Snowの世界-やる事リスト", description=response.text, timestamp=datetime.datetime.utcnow(), color=0x00ffff)
+	  #embed.add_field(name="undefined", value=response.text, inline=False)
+	  embed.set_author(name="HRTK92", url="https://github.com/HRTK92", icon_url="https://avatars.githubusercontent.com/u/70054655?s=64&v=4")
+	  embed.set_footer(text="最終更新時間")
+	  await ctx.message.delete()
+	  await ctx.send(embed=embed)

@@ -1,12 +1,9 @@
-from aiohttp import web
+import asyncio
+import aiohttp
+import threading
 
-
-async def handle(request):
-	name = request.match_info.get('name', "Anonymous")
-	text = "Hello, " + name
-	return web.Response(text=text)
-
-async def setup():
-  app = web.Application()
-  app.add_routes([web.get('/', handle), web.get('/{name}', handle)])
-  await web.run_app(app)
+def start_web():
+	loop = asyncio.new_event_loop()
+	asyncio.set_event_loop(loop)
+	web = aiohttp.web.Application()
+	aiohttp.web.run_app(app, loop=lop)

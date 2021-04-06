@@ -8,8 +8,15 @@ import logging
 from . import music
 import asyncio
 from discord.ext import commands
+from discord_slash import SlashCommand, SlashContext
+from sanic import Sanic
+from sanic.response import json as sanic_json
 
-
+app = Sanic(__name__)
+@app.route('/')
+async def test(request):
+    return sanic_json({'hello': 'world'})
+    
 json_open_config = open('config/config.json', 'r')
 config = json.load(json_open_config)
 
@@ -17,6 +24,8 @@ logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)
 
 loop = asyncio.get_event_loop()
+
+
 
 class Mybot(commands.Bot):
 	def __init__(self) -> None:
@@ -38,6 +47,11 @@ class Mybot(commands.Bot):
 		print(f'ユーザー名:{self.user}')
 		print(f'アクティビティ:{config["activity"]}')
 		print(f'\n')
+		#await app.create_server(host='0.0.0.0', return_asyncio_server=True)
+		
+	async def on_message(self, message):
+		print(f"{message.author.name}｜{message.content}")
+		await self.process_commands(message)
 		
 	async def on_member_join(self, member):
 		guild = member.guild
@@ -70,11 +84,7 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 
 	def get_ending_note(self):
 		return (
-		    f"プレフィックス {prefix}\n各コマンドの説明: {prefix}help <コマンド名>\n"
-		    f"各カテゴリの説明: {prefix}help <カテゴリ名>\n\n\ndiscord.py: {discord.__version__}"
-		)
+		    "プレフィックス {0}\n各コマンドの説明: {0}help <コマンド名>\n"
+		    "各カテゴリの説明: {0}help <カテゴリ名>\n\n\ndiscord.py: {1}"
+		).format(config["command_prefix"], discord.__version__)
 
-"""
-@app.route("/")
-async def test(request):
-    return sjson({"hello": "world"})"""

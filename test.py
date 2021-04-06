@@ -1,3 +1,0 @@
-import discordbot
-
-modules.start("")

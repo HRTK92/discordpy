@@ -3,19 +3,20 @@ import json
 import platform
 import discord
 
-import modules
+import discordbot
 
+
+    
 def start(token):
-  client = modules.Mybot()
-  client.add_cog(modules.Commands(client))
-  client.add_cog(modules.Commands_fn(client))
-  client.add_cog(modules.Commands_ch(client))
-  client.add_cog(modules.Music(client))
-  client.add_cog(modules.Poll(client))
-  client.add_cog(modules.Commands_test(client))
+  client = discordbot.Mybot()
+  client.add_cog(discordbot.Commands(client))
+  client.add_cog(discordbot.Commands_ch(client))
+  client.add_cog(discordbot.Commands_fn(client))
+  client.add_cog(discordbot.Music(client))
+  client.add_cog(discordbot.Poll(client))
+  client.add_cog(discordbot.Commands_test(client))
   print(f'python {platform.python_version()}')
   print("discord.py " + discord.__version__)
   print('discord.py Rapptz')
   loop = asyncio.get_event_loop()
-  #loop.run_until_complete(modules.setup())
-  loop.run_until_complete(client.run(token))
+  loop.run_until_complete(client.start(token))

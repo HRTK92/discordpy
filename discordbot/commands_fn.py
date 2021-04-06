@@ -23,9 +23,8 @@ class Commands_fn(commands.Cog, name='fortnite'):
 	async def news(self, ctx):
 		"""Fortnite Newsを表示する"""
 		res_lang = "ja"
-		async with aiohttp.ClientSession() as session:
-		  async with session.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}') as response:
-		    geted = response.json()
+		async with session.get(f'https://fortnite-api.com/v2/news/br?language={res_lang}') as response:pass
+
 		if response.status_code == 200:
 			text = "Fortnite News"
 			image = geted['data']['image']
@@ -43,7 +42,8 @@ class Commands_fn(commands.Cog, name='fortnite'):
 		async with aiohttp.ClientSession() as session:
 		  async with session.get(f'https://fortnite-api.com/v1/stats/br/v2?name={joinedArgs}&image=all') as response:
 		    geted = response.json()
-		if response.status_code == 200:
+		    status_code = response.status
+		if status_code == 200:
 			text = f'Fortnite プレイヤー成績情報 : [{joinedArgs}]'
 			image = geted['data']['image']
 			embed = discord.Embed(title=text, color=0x00ff00)
@@ -55,7 +55,7 @@ class Commands_fn(commands.Cog, name='fortnite'):
 			embed.set_image(url=image)
 			embed.set_footer(text=f'送信者:{ctx.author.display_name}')
 			await edit.edit(content="", embed=embed)
-		if response.status_code == 404:
+		if status_code == 404:
 			text = f'Fortnite プレイヤー成績情報 : [{joinedArgs}]'
 			embed = discord.Embed(title=text, color=0xff0000)
 			embed.add_field(
