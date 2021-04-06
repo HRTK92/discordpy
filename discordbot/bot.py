@@ -50,8 +50,10 @@ class Mybot(commands.Bot):
 		#await app.create_server(host='0.0.0.0', return_asyncio_server=True)
 		
 	async def on_message(self, message):
-		print(f"{message.author.name}｜{message.content}")
-		await self.process_commands(message)
+	  if message.author.bot:
+	    return
+	  print(f"{message.author.name}｜{message.content}")
+	  await self.process_commands(message)
 		
 	async def on_member_join(self, member):
 		guild = member.guild
