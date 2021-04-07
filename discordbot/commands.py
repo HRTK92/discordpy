@@ -83,7 +83,7 @@ class Commands(commands.Cog, name='コマンド'):
 	  pass
 	@commands.command(name="マイクラルール")
 	async def mc_rule(self, ctx, *args):
-	  url = "https://raw.githubusercontent.com/HRTK92/HR.Snow-World/main/rule.txt"
+	  url = "https://raw.githubusercontent.com/HRTK92/HR.Snow-World/main/rule.md"
 	  response = requests.get(url)
 	  embed=discord.Embed(title="HR.Snowの世界-ルール", url=url, description=response.text, timestamp=datetime.datetime.utcnow(), color=0x00ffff)
 	  #embed.add_field(name="undefined", value=response.text, inline=False)
