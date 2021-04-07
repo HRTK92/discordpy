@@ -71,8 +71,9 @@ class Mybot(commands.Bot):
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
 
-	async def on_member_update(self, before, after):
-		pass
+	async def on_member_update(self, before, after):pass
+		#before_after_sym_diff = set(before) ^ set(after)
+		#print(before_after_sym_diff)
 
 	#reaction
 	async def on_raw_reaction_add(self, payload):
