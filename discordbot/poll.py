@@ -23,7 +23,8 @@ class Poll(commands.Cog, name='投票'):
 	  for x, option in enumerate(options):
 	    description += '\n {} {}'.format(reactions[x], option)
 	  embed = discord.Embed(title=question, description=''.join(description))
-	  embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar)
+	  embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+	  embed.set_footer(text="投票")
 	  react_message = await ctx.send(embed=embed)
 	  for reaction in reactions[:len(options)]:
 	    await react_message.add_reaction(reaction)
