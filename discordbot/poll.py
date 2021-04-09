@@ -2,6 +2,8 @@ import requests
 import discord
 from discord.ext import commands
 import time
+import datetime
+
 async def is_owner(ctx):
     return ctx.author.id == 618332297275375636
 class Poll(commands.Cog, name='投票'):
@@ -10,10 +12,10 @@ class Poll(commands.Cog, name='投票'):
 	@commands.command()
 	async def poll(self, ctx,question, *options: str):
 	  if len(options) <= 1:
-	    await ctx.send('You need more than one option to make a poll!')
+	    await ctx.send('投票を行うには、複数のオプションが必要です。')
 	    return
 	  if len(options) > 10:
-	    await ctx.send('You cannot make a poll for more than 10 things!')
+	    await ctx.send('あなたは10以上のもののために投票をすることはできません！')
 	    return
 	  if len(options) == 2 and options[0] == 'yes' and options[1] == 'no':
 	    reactions = ['✅', '❌']
@@ -23,6 +25,10 @@ class Poll(commands.Cog, name='投票'):
 	  for x, option in enumerate(options):
 	    description += '\n {} {}'.format(reactions[x], option)
 	  embed = discord.Embed(title=question, description=''.join(description))
+	  embed.add_field(name="質問", value=question, inline=False)
+	  embed.add_field(name="選択肢", value=''.join(description), inline=False)
+	  dt_now = datetime.datetime.now()
+	  embed.add_field(name="受け付けた時間", value=dt_now.strftime('%Y年%m月%d日 %H:%M:%S'), inline=False)
 	  embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 	  embed.set_footer(text="投票")
 	  react_message = await ctx.send(embed=embed)
