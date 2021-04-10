@@ -29,3 +29,5 @@ class Settings:
     self.debug_guild_id = 622206625586872323
     self.debug_channel_id = 830036485675155526
     self.fortnite_api = "6ef723f9-d83f254a-d4f28575-c34e5374"
+    self.command_prefix = "."
+    self.activity = "起　動　中"

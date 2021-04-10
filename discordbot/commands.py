@@ -104,5 +104,6 @@ class Commands(commands.Cog, name='コマンド'):
 	  await ctx.send(embed=embed)
 	  
 	@commands.command()
-	async def nick(self, ctx, nickname, *args):
-	  await ctx.author.edit(nick=nickname)
+	async def nick(self, ctx, member: discord.Member, nick):
+	  await member.edit(nick=nick)
+	  await ctx.send(f'Nickname was changed for {member.mention} ')

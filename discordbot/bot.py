@@ -7,39 +7,41 @@ import requests
 import datetime
 import discord
 import asyncio
+import sqlite3
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
 from sanic import Sanic
 from sanic.response import json as sanic_json
 from .setup import Settings
 from . import music
-json_open_config = open('config/config.json', 'r')
-config = json.load(json_open_config)
+
 
 loop = asyncio.get_event_loop()
 
 class Mybot(commands.Bot):
 	def __init__(self, settings:Settings) -> None:
-		self.config = config
 		self.message = f'[bot] [{datetime.datetime.now().strftime("%H:%M:%S")}] '
 		self.settings = settings
 		intents = discord.Intents.default()
 		intents.members = True
 		super().__init__(
-		    command_prefix=config["command_prefix"],
+		    command_prefix=self.settings.command_prefix,
 		    loop=loop,
 		    intents=discord.Intents.all(),
 		    owner_id=618332297275375636,
 		    activity=discord.Activity(
-		        name=config["activity"], type=discord.ActivityType.watching),
+		        name=self.settings.activity, type=discord.ActivityType.watching),
 		    help_command=JapaneseHelpCommand())
 
 	async def on_ready(self):
-		print("-----------------------")
-		print('ログインしました')
-		print(f'ユーザー名:{self.user}')
-		print(f'アクティビティ:{self.activity}')
-		slash = SlashCommand(self, override_type = True)
+	  conn = sqlite3.connect('discord.db')
+	  c = conn.cursor()
+	  conn.close()
+	  print("-----------------------")
+	  print('ログインしました')
+	  print(f'ユーザー名:{self.user}')
+	  print(f'アクティビティ:{self.activity}')
+	  slash = SlashCommand(self, override_type = True)
 		#await app.create_server(host='0.0.0.0', return_asyncio_server=True)
 		
 	async def on_message(self, message):
@@ -116,5 +118,5 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 		return (
 		    "プレフィックス {0}\n各コマンドの説明: {0}help <コマンド名>\n"
 		    "各カテゴリの説明: {0}help <カテゴリ名>\n\n\ndiscord.py: {1}"
-		).format(config["command_prefix"], discord.__version__)
+		).format(".", discord.__version__)
 
