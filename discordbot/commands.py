@@ -102,3 +102,7 @@ class Commands(commands.Cog, name='コマンド'):
 	  embed.set_footer(text="最終更新時間")
 	  await ctx.message.delete()
 	  await ctx.send(embed=embed)
+	  
+	@commands.command()
+	async def nick(self, ctx, nickname, *args):
+	  await ctx.author.edit(nick=nickname)

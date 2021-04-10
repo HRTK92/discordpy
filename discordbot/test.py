@@ -9,4 +9,4 @@ class Commands_test(commands.Cog, name='テスト'):
 		self.bot = bot
 	@commands.command()
 	async def test(self, ctx):
-	  await ctx.send(self.bot)
+	  await ctx.author.edit(nick="!")

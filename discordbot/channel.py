@@ -68,3 +68,6 @@ class Commands_ch(commands.Cog, name='チャンネル'):
 		member = guild.get_member(args[0])
 		role = discord.utils.get(guild.roles, name=f"@{ctx.channel.name}に参加できる権限")
 		await member.add_roles(role)
+		
+	@commands.command()
+	async def clear(ctx, number: int):pass
