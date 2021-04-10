@@ -2,7 +2,7 @@ import requests
 import discord
 from discord.ext import commands
 import time
-import datetime
+import datetime, pytz
 
 async def is_owner(ctx):
     return ctx.author.id == 618332297275375636
@@ -27,7 +27,7 @@ class Poll(commands.Cog, name='投票'):
 	  embed = discord.Embed(color=0x4a4aff)
 	  embed.add_field(name="🔎質問🔎", value=question, inline=False)
 	  embed.add_field(name="選択肢", value=''.join(description), inline=False)
-	  dt_now = datetime.datetime.now()
+	  dt_now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))#datetime.datetime.now()
 	  embed.add_field(name="受け付けた時間", value=dt_now.strftime('%Y年%m月%d日 %H:%M:%S'), inline=True)
 	  embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
 	  embed.set_footer(text="投票｜集計するには「🔵」を追加してください")
