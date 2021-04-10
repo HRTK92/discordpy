@@ -81,7 +81,7 @@ class Mybot(commands.Bot):
 		if payload.emoji.name == "🔵":
 		  text = ""
 		  for reaction in  message.reactions:
-		    text += f'\n{reaction.emoji}｜{reaction.count}'
+		    text += f'\n{reaction.emoji}｜{reaction.count - 1}'
 		  await channel.send(text)
 		  await message.remove_reaction(payload.emoji, user)
 	async def on_raw_reaction_remove(self, payload):
