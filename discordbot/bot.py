@@ -8,7 +8,7 @@ import datetime
 import discord
 import asyncio
 import sqlite3
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord_slash import SlashCommand, SlashContext
 from sanic import Sanic
 from sanic.response import json as sanic_json
@@ -26,11 +26,12 @@ class Mybot(commands.Bot):
 		intents.members = True
 		super().__init__(
 		    command_prefix=self.settings.command_prefix,
+		    case_insensitive=True,
 		    loop=loop,
 		    intents=discord.Intents.all(),
 		    owner_id=618332297275375636,
 		    activity=discord.Activity(
-		        name=self.settings.activity, type=discord.ActivityType.watching),
+		        name="読み込み中…", type=discord.ActivityType.watching),
 		    help_command=JapaneseHelpCommand())
 
 	async def on_ready(self):
@@ -42,8 +43,7 @@ class Mybot(commands.Bot):
 	  print(f'ユーザー名:{self.user}')
 	  print(f'アクティビティ:{self.activity}')
 	  slash = SlashCommand(self, override_type = True)
-		#await app.create_server(host='0.0.0.0', return_asyncio_server=True)
-		
+	  await self.change_presence(activity=discord.Activity(name="Ready", type=discord.ActivityType.watching),)
 	async def on_message(self, message):
 	  if message.author.bot:
 	    return
@@ -101,9 +101,8 @@ class Mybot(commands.Bot):
 	  embed.description = '```py\n%s\n```' % traceback.format_exc()
 	  embed.timestamp = datetime.datetime.utcnow()
 	  await channel.send(embed=embed)
-    
+	@tasks.loop(seconds=5)
 	async def bot_activity():
-	  url = "https://www.warera.ml/"
 	  await bot.change_presence(activity=discord.Streaming(name="My Stream", url=url))
 
 
