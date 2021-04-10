@@ -37,7 +37,6 @@ class Mybot(commands.Bot):
 	async def on_ready(self):
 	  conn = sqlite3.connect('discord.db')
 	  c = conn.cursor()
-	  conn.close()
 	  print("-----------------------")
 	  print('ログインしました')
 	  print(f'ユーザー名:{self.user}')
@@ -58,7 +57,6 @@ class Mybot(commands.Bot):
 			await guild.system_channel.send(to_send)
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
-		#await app.create_server(host="0.0.0.0", port=8000, return_asyncio_server=True)
 
 	async def on_member_remove(self, member):
 		guild = member.guild
@@ -103,7 +101,7 @@ class Mybot(commands.Bot):
 	  await channel.send(embed=embed)
 	@tasks.loop(seconds=5)
 	async def bot_activity():
-	  await bot.change_presence(activity=discord.Streaming(name="My Stream", url=url))
+	  await bot.change_presence(activity=discord.Activity(name="Ready", type=discord.ActivityType.watching))
 
 
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
