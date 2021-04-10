@@ -1,37 +1,29 @@
-import discord
 import sys
 import platform
 import json
 import datetime
 import requests
-import logging
-from . import music
+import datetime
+import discord
 import asyncio
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
 from sanic import Sanic
 from sanic.response import json as sanic_json
-import datetime
-
-app = Sanic(__name__)
-@app.route('/')
-async def test(request):
-    return sanic_json({'hello': 'world'})
-    
+from .setup import Settings
+from . import music
 json_open_config = open('config/config.json', 'r')
 config = json.load(json_open_config)
 
-logger = logging.getLogger('discord')
-logger.setLevel(logging.INFO)
-
 loop = asyncio.get_event_loop()
 
-
-
 class Mybot(commands.Bot):
-	def __init__(self) -> None:
-		self.config = config,
+	def __init__(self, settings:Settings) -> None:
+		self.config = config
 		self.message = f'[bot] [{datetime.datetime.now().strftime("%H:%M:%S")}] '
+		self.debug_guild_id = 622206625586872323
+		self.debug_channel_id = 830036485675155526
+		self.settings = settings
 		intents = discord.Intents.default()
 		intents.members = True
 		super().__init__(
@@ -56,7 +48,8 @@ class Mybot(commands.Bot):
 	    return
 	  print(f"{self.message}{message.author.name}｜{message.content}")
 	  await self.process_commands(message)
-		
+	async def on_message_delete(self, message):
+	  pass
 	async def on_member_join(self, member):
 		guild = member.guild
 		if guild.system_channel is not None:
@@ -71,13 +64,34 @@ class Mybot(commands.Bot):
 		channel = guild.get_channel(636457818110820362)
 		await channel.edit(name=f"👥メンバー数:{guild.member_count}")
 
-	async def on_member_update(self, before, after):pass
+	async def on_member_update(self, before, after):
+	  pass
 		#before_after_sym_diff = set(before) ^ set(after)
 		#print(before_after_sym_diff)
 
 	#reaction
 	async def on_raw_reaction_add(self, payload):
-		print(self.message, payload)
+		#print(self.message, payload)
+		guild = self.get_guild(payload.guild_id)
+		channel = guild.get_channel(payload.channel_id)
+		message = await channel.fetch_message(payload.message_id)
+		user = self.get_user(payload.member.id)
+		if payload.member.bot:
+		  return
+		if payload.emoji.name == "🔵":
+		  text = ""
+		  for reaction in  message.reactions:
+		    text += f'\n{reaction.emoji}｜{reaction.count}'
+		  await channel.send(text)
+		  await message.remove_reaction(payload.emoji, user)
+	async def on_raw_reaction_remove(self, payload):
+	  pass
+	async def on_voice_state_update(self, member, before, after):
+	  channel = self.get_channel(self.settings.debug_channel_id)
+	  await channel.send(f"{after}")
+	
+	async def on_typing(channel, user, when):
+	  pass
 
 	async def bot_activity():
 	  url = "https://www.warera.ml/"

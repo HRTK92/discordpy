@@ -34,3 +34,4 @@ class Poll(commands.Cog, name='投票'):
 	  react_message = await ctx.send(embed=embed)
 	  for reaction in reactions[:len(options)]:
 	    await react_message.add_reaction(reaction)
+	  await react_message.add_reaction('🔵')

@@ -6,5 +6,5 @@ from .fortnite import Commands_fn
 from .test import Commands_test
 from .music import Music
 from .poll import Poll
-from .setup import start
+from .setup import start, Settings
 from .web import start_web
