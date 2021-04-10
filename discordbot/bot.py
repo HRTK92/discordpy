@@ -1,4 +1,5 @@
 import sys
+import traceback
 import platform
 import json
 import datetime
@@ -94,7 +95,12 @@ class Mybot(commands.Bot):
 	  pass
 	async def on_error(self, event, *args, **kwargs):
 	  channel = self.get_channel(self.settings.debug_channel_id)
-	  channel.send(event, args, kwargs)
+	  embed = discord.Embed(title=':x: Event Error', colour=0xe74c3c) #Red
+	  embed.add_field(name='Event', value=event)
+	  embed.description = '```py\n%s\n```' % traceback.format_exc()
+	  embed.timestamp = datetime.datetime.utcnow()
+	  await channel.send(embed=embed)
+    
 	async def bot_activity():
 	  url = "https://www.warera.ml/"
 	  await bot.change_presence(activity=discord.Streaming(name="My Stream", url=url))

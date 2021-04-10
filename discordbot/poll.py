@@ -3,13 +3,15 @@ import discord
 from discord.ext import commands
 import time
 import datetime, pytz
-
+from discord_slash import cog_ext, SlashContext
 async def is_owner(ctx):
     return ctx.author.id == 618332297275375636
 class Poll(commands.Cog, name='投票'):
 	def __init__(self, bot):
 		self.bot = bot
-	@commands.command()
+	
+		
+	@cog_ext.cog_slash(name="poll")
 	async def poll(self, ctx,question, *options: str):
 	  if len(options) <= 1:
 	    await ctx.send('投票を行うには、複数のオプションが必要です。')
