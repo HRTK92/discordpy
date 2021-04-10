@@ -30,8 +30,8 @@ class Poll(commands.Cog, name='投票'):
 	  dt_now = datetime.datetime.now()
 	  embed.add_field(name="受け付けた時間", value=dt_now.strftime('%Y年%m月%d日 %H:%M:%S'), inline=True)
 	  embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-	  embed.set_footer(text="投票")
+	  embed.set_footer(text="投票｜集計するには「🔵」を追加してください")
 	  react_message = await ctx.send(embed=embed)
 	  for reaction in reactions[:len(options)]:
 	    await react_message.add_reaction(reaction)
-	  await react_message.add_reaction('🔵')
+	  #await react_message.add_reaction('🔵')
