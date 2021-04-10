@@ -21,8 +21,6 @@ class Mybot(commands.Bot):
 	def __init__(self, settings:Settings) -> None:
 		self.config = config
 		self.message = f'[bot] [{datetime.datetime.now().strftime("%H:%M:%S")}] '
-		self.debug_guild_id = 622206625586872323
-		self.debug_channel_id = 830036485675155526
 		self.settings = settings
 		intents = discord.Intents.default()
 		intents.members = True
@@ -79,20 +77,24 @@ class Mybot(commands.Bot):
 		if payload.member.bot:
 		  return
 		if payload.emoji.name == "🔵":
+		  await message.remove_reaction(payload.emoji, user)
 		  text = ""
 		  for reaction in  message.reactions:
 		    text += f'\n{reaction.emoji}｜{reaction.count - 1}'
-		  await channel.send(text)
-		  await message.remove_reaction(payload.emoji, user)
+		  embed = message.embeds[0]
+		  embed.add_field(name="集計結果", value=text, inline=False)
+		  await message.edit(embed=embed)
 	async def on_raw_reaction_remove(self, payload):
 	  pass
 	async def on_voice_state_update(self, member, before, after):
 	  channel = self.get_channel(self.settings.debug_channel_id)
 	  await channel.send(f"{after}")
 	
-	async def on_typing(channel, user, when):
+	async def on_typing(self, channel, user, when):
 	  pass
-
+	async def on_error(self, event, *args, **kwargs):
+	  channel = self.get_channel(self.settings.debug_channel_id)
+	  channel.send(event, args, kwargs)
 	async def bot_activity():
 	  url = "https://www.warera.ml/"
 	  await bot.change_presence(activity=discord.Streaming(name="My Stream", url=url))
