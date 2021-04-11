@@ -45,7 +45,5 @@ class Owner(commands.Cog):
         await ctx.send("Shards: " + str(self.bot.shard_count))
 
 
-
-
 def setup(bot):
     bot.add_cog(Owner(bot))

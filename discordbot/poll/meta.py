@@ -1,6 +1,7 @@
-import discord 
+import discord
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
+
 
 class Meta(commands.Cog):
     def __init__(self, bot):
@@ -21,12 +22,12 @@ class Meta(commands.Cog):
         )
 
     @commands.command(name="help")
-    @commands.cooldown(2,60,BucketType.user) 
+    @commands.cooldown(2, 60, BucketType.user)
     async def help(self, ctx):
         await ctx.message.channel.send(embed=self.help_message)
 
     @commands.command(name="invite")
-    @commands.cooldown(2,60,BucketType.user) 
+    @commands.cooldown(2, 60, BucketType.user)
     async def invite(self, ctx):
         await ctx.message.channel.send(embed=self.invite_message)
 
@@ -39,6 +40,7 @@ class Meta(commands.Cog):
     async def invite_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
             await ctx.send(error)
+
 
 def setup(bot):
     bot.add_cog(Meta(bot))
