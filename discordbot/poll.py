@@ -20,7 +20,7 @@ class Poll(commands.Cog, name="投票"):
             await ctx.send("投票を行うには、複数のオプションが必要です。")
             return
         if len(options) > 10:
-            await ctx.send("あなたは10以上のもののために投票をすることはできません！")
+            await ctx.send("選択肢は10以下にしてください。")
             return
         if len(options) == 2 and options[0] == "yes" and options[1] == "no":
             reactions = ["✅", "❌"]
