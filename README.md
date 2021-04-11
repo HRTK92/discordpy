@@ -1,11 +1,3 @@
 # discordpy
 ***
-# install
-```
-pip install git+https://github.com/HRTK92/discordpy
-```
-
-```py
-import fnbot
-fnbot.start()
-```
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#discordpy)
