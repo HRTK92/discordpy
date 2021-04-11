@@ -2,8 +2,11 @@ import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
+
 def _requires_from_file(filename):
     return open(filename).read().splitlines()
+
 
 setuptools.setup(
     name="discord",
@@ -20,8 +23,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    entry_points = {
-    },
-    python_requires='>=3.7',
-    install_requires=_requires_from_file("requirements.txt")
+    entry_points={},
+    python_requires=">=3.7",
+    install_requires=_requires_from_file("requirements.txt"),
 )
