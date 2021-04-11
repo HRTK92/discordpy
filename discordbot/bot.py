@@ -110,12 +110,6 @@ class Mybot(commands.Bot):
         embed.timestamp = datetime.datetime.utcnow()
         await channel.send(embed=embed)
 
-    @tasks.loop(seconds=5)
-    async def bot_activity():
-        await bot.change_presence(
-            activity=discord.Activity(name="Ready", type=discord.ActivityType.watching)
-        )
-
 
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
     def __init__(self):
