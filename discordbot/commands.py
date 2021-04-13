@@ -24,7 +24,7 @@ class Commands(commands.Cog, name="コマンド"):
 
     @commands.command()
     @commands.check(is_owner)
-    async def say(self, ctx,channel: init, arg):
+    async def say(self, ctx,channel: int, arg):
         channel = self.bot.get_channel(channel)
         await channel.send(arg)
 
