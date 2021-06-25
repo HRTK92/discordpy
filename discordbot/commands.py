@@ -24,8 +24,9 @@ class Commands(commands.Cog, name="コマンド"):
 
     @commands.command()
     @commands.check(is_owner)
-    async def say(self, ctx,channel: int, arg):
-        channel = self.bot.get_channel(channel)
+    async def say(self, ctx,channel, arg):
+        channel = self.bot.get_channel(int(re.sub(r"\D", "", channel)))
+        #arguments = ','.join(args)
         await channel.send(arg)
 
     @commands.command()

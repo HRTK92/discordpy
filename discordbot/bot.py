@@ -1,4 +1,4 @@
-import sys
+import sys,os
 import traceback
 import platform
 import json
@@ -48,11 +48,15 @@ class Mybot(commands.Bot):
         await self.change_presence(
             activity=discord.Activity(name="Ready", type=discord.ActivityType.watching),
         )
+        #os.system("python -m http.server 8000")
 
     async def on_message(self, message):
         if message.author.bot:
             return
         print(f"{self.message}{message.author.name}｜{message.content}")
+        if message.channel.id == 848091616299450403:
+          await message.add_reaction('👍')
+          await message.add_reaction('👎')
         await self.process_commands(message)
 
     async def on_message_delete(self, message):
@@ -61,9 +65,11 @@ class Mybot(commands.Bot):
     async def on_member_join(self, member):
         guild = member.guild
         if guild.system_channel is not None:
-            to_send = f"{member.mention}ようこそ サーバーへ\nサーバー管理者 <@618332297275375636> \nhttps://discord.gg/vXgDnP7"
+            channel = guild.get_channel(guild.system_channel.id)
+            link = await channel.create_invite(max_age = 300)
+            to_send = f"{member.mention}ようこそ サーバーへ\nボットの管理者 <@618332297275375636> \n{link}"
             await guild.system_channel.send(to_send)
-        channel = guild.get_channel(636457818110820362)
+        channel = discord.utils.get(member.guild.text_channels, name="👥メンバー数")
         await channel.edit(name=f"👥メンバー数:{guild.member_count}")
 
     async def on_member_remove(self, member):
@@ -109,6 +115,7 @@ class Mybot(commands.Bot):
         embed.description = "```py\n%s\n```" % traceback.format_exc()
         embed.timestamp = datetime.datetime.utcnow()
         await channel.send(embed=embed)
+        print(traceback.format_exc())
 
 
 class JapaneseHelpCommand(commands.DefaultHelpCommand):
