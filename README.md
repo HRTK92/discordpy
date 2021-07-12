@@ -1,3 +1,3 @@
-#discordpyを使ったボット
+# discordpyを使ったボット
 ***
 
