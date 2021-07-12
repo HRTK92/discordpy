@@ -36,8 +36,6 @@ class Mybot(commands.Bot):
         )
 
     async def on_ready(self):
-        conn = sqlite3.connect("discord.db")
-        c = conn.cursor()
         print("-----------------------")
         print("ログインしました")
         print(f"ユーザー名:{self.user}")

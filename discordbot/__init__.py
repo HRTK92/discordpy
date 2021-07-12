@@ -7,4 +7,3 @@ from .test import Commands_test
 from .music import Music
 from .poll import Poll
 from .setup import start, Settings
-from .db import *
