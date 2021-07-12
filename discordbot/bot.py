@@ -16,7 +16,6 @@ from .setup import Settings
 from . import music
 
 
-loop = asyncio.get_event_loop()
 
 
 class Mybot(commands.Bot):
@@ -28,7 +27,6 @@ class Mybot(commands.Bot):
         super().__init__(
             command_prefix=self.settings.command_prefix,
             case_insensitive=True,
-            loop=loop,
             intents=discord.Intents.all(),
             owner_id=618332297275375636,
             activity=discord.Activity(
@@ -48,7 +46,7 @@ class Mybot(commands.Bot):
         await self.change_presence(
             activity=discord.Activity(name="Ready", type=discord.ActivityType.watching),
         )
-        #os.system("python -m http.server 8000")
+
 
     async def on_message(self, message):
         if message.author.bot:
@@ -102,8 +100,17 @@ class Mybot(commands.Bot):
         pass
 
     async def on_voice_state_update(self, member, before, after):
-        channel = self.get_channel(self.settings.debug_channel_id)
-        await channel.send(f"{after}")
+    	if before.channel is None: 
+    		if member.id != self.user.id:
+    			if member.guild.voice_client is None:
+    				await asyncio.sleep(0.5)
+    				await after.channel.connect()
+    	elif after.channel is None:
+    		if member.id != self.user.id:
+    			if member.guild.voice_client.channel is before.channel:
+    				if len(member.guild.voice_client.channel.members) == 1:
+    					await asyncio.sleep(0.5)
+    					await member.guild.voice_client.disconnect() #切断
 
     async def on_typing(self, channel, user, when):
         pass
