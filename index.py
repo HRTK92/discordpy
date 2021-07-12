@@ -27,5 +27,6 @@ class Settings:
         self.fortnite_api = "6ef723f9-d83f254a-d4f28575-c34e5374"
         self.command_prefix = "."
         self.activity = "起　動　中"
-        
+
+
 start(os.getenv("TOKEN"))
